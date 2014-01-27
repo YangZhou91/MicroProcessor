@@ -196,8 +196,8 @@ Image Symbol Table
     ../clib/stdio.c                          0x00000000   Number         0  ferror.o ABSOLUTE
     ../clib/stdlib.c                         0x00000000   Number         0  exit.o ABSOLUTE
     ../fplib/fpinit.s                        0x00000000   Number         0  fpinit.o ABSOLUTE
+    Fermat.s                                 0x00000000   Number         0  fermat.o ABSOLUTE
     dc.s                                     0x00000000   Number         0  dc.o ABSOLUTE
-    src\Fermat.s                             0x00000000   Number         0  fermat.o ABSOLUTE
     src\\fputc_debug.c                       0x00000000   Number         0  fputc_debug.o ABSOLUTE
     src\\system_stm32f4xx.c                  0x00000000   Number         0  system_stm32f4xx.o ABSOLUTE
     src\fputc_debug.c                        0x00000000   Number         0  fputc_debug.o ABSOLUTE
@@ -264,10 +264,10 @@ Image Symbol Table
     .text                                    0x08000392   Section        0  __printf_nopercent.o(.text)
     .text                                    0x080003b8   Section        0  exit.o(.text)
     .text                                    0x080003c4   Section        8  libspace.o(.text)
-    text                                     0x080003cc   Section       12  fermat.o(text)
+    text                                     0x080003cc   Section        6  fermat.o(text)
     $v0                                      0x080003cc   Number         0  fermat.o(text)
-    x$fpl$fpinit                             0x080003d8   Section       10  fpinit.o(x$fpl$fpinit)
-    $v0                                      0x080003d8   Number         0  fpinit.o(x$fpl$fpinit)
+    x$fpl$fpinit                             0x080003d2   Section       10  fpinit.o(x$fpl$fpinit)
+    $v0                                      0x080003d2   Number         0  fpinit.o(x$fpl$fpinit)
     .data                                    0x20000000   Section        8  fputc_debug.o(.data)
     .bss                                     0x20000008   Section       96  libspace.o(.bss)
     HEAP                                     0x20000068   Section      512  startup_stm32f40xx.o(HEAP)
@@ -473,11 +473,11 @@ Image Symbol Table
     __user_perproc_libspace                  0x080003c5   Thumb Code     0  libspace.o(.text)
     __user_perthread_libspace                0x080003c5   Thumb Code     0  libspace.o(.text)
     fermat1                                  0x080003cd   Thumb Code     0  fermat.o(text)
-    _fp_init                                 0x080003d9   Thumb Code    10  fpinit.o(x$fpl$fpinit)
-    __fplib_config_fpu_vfp                   0x080003e1   Thumb Code     0  fpinit.o(x$fpl$fpinit)
-    __fplib_config_pureend_doubles           0x080003e1   Thumb Code     0  fpinit.o(x$fpl$fpinit)
-    Region$$Table$$Base                      0x080003e4   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x08000404   Number         0  anon$$obj.o(Region$$Table)
+    _fp_init                                 0x080003d3   Thumb Code    10  fpinit.o(x$fpl$fpinit)
+    __fplib_config_fpu_vfp                   0x080003db   Thumb Code     0  fpinit.o(x$fpl$fpinit)
+    __fplib_config_pureend_doubles           0x080003db   Thumb Code     0  fpinit.o(x$fpl$fpinit)
+    Region$$Table$$Base                      0x080003dc   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x080003fc   Number         0  anon$$obj.o(Region$$Table)
     __stdout                                 0x20000000   Data           4  fputc_debug.o(.data)
     __stdin                                  0x20000004   Data           4  fputc_debug.o(.data)
     __libspace_start                         0x20000008   Data          96  libspace.o(.bss)
@@ -491,9 +491,9 @@ Memory Map of the image
 
   Image Entry point : 0x08000189
 
-  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x0000040c, Max: 0x00100000, ABSOLUTE)
+  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x00000404, Max: 0x00100000, ABSOLUTE)
 
-    Execution Region ER_IROM1 (Base: 0x08000000, Size: 0x00000404, Max: 0x00100000, ABSOLUTE)
+    Execution Region ER_IROM1 (Base: 0x08000000, Size: 0x000003fc, Max: 0x00100000, ABSOLUTE)
 
     Base Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -558,10 +558,9 @@ Memory Map of the image
     0x08000392   0x00000026   Code   RO          151    .text               c_w.l(__printf_nopercent.o)
     0x080003b8   0x0000000c   Code   RO          153    .text               c_w.l(exit.o)
     0x080003c4   0x00000008   Code   RO          161    .text               c_w.l(libspace.o)
-    0x080003cc   0x0000000c   Code   RO          110    text                fermat.o
-    0x080003d8   0x0000000a   Code   RO          218    x$fpl$fpinit        fz_wm.l(fpinit.o)
-    0x080003e2   0x00000002   PAD
-    0x080003e4   0x00000020   Data   RO          279    Region$$Table       anon$$obj.o
+    0x080003cc   0x00000006   Code   RO          110    text                fermat.o
+    0x080003d2   0x0000000a   Code   RO          218    x$fpl$fpinit        fz_wm.l(fpinit.o)
+    0x080003dc   0x00000020   Data   RO          279    Region$$Table       anon$$obj.o
 
 
     Execution Region RW_IRAM1 (Base: 0x20000000, Size: 0x00000668, Max: 0x00020000, ABSOLUTE)
@@ -581,13 +580,13 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
-        12          0          0          0          0        220   fermat.o
-        76          4          0          8          0       7185   fputc_debug.o
-        28         16          0          0          0        467   main.o
-        56         22        392          0       1536        816   startup_stm32f40xx.o
+         6          0          0          0          0        208   fermat.o
+        76          4          0          8          0       7189   fputc_debug.o
+        28         16          0          0          0        471   main.o
+        56         22        392          0       1536        820   startup_stm32f40xx.o
 
     ----------------------------------------------------------------------
-       172         42        424          8       1536       8688   Object Totals
+       166         42        424          8       1536       8688   Object Totals
          0          0         32          0          0          0   (incl. Generated)
          0          0          0          0          0          0   (incl. Padding)
 
@@ -621,8 +620,8 @@ Image component sizes
         10          0          0          0          0        116   fpinit.o
 
     ----------------------------------------------------------------------
-       432         26          0          0         96       1036   Library Totals
-        10          0          0          0          0          0   (incl. Padding)
+       430         26          0          0         96       1036   Library Totals
+         8          0          0          0          0          0   (incl. Padding)
 
     ----------------------------------------------------------------------
 
@@ -632,7 +631,7 @@ Image component sizes
         10          0          0          0          0        116   fz_wm.l
 
     ----------------------------------------------------------------------
-       432         26          0          0         96       1036   Library Totals
+       430         26          0          0         96       1036   Library Totals
 
     ----------------------------------------------------------------------
 
@@ -641,15 +640,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-       604         68        424          8       1632       9056   Grand Totals
-       604         68        424          8       1632       9056   ELF Image Totals
-       604         68        424          8          0          0   ROM Totals
+       596         68        424          8       1632       9056   Grand Totals
+       596         68        424          8       1632       9056   ELF Image Totals
+       596         68        424          8          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                 1028 (   1.00kB)
+    Total RO  Size (Code + RO Data)                 1020 (   1.00kB)
     Total RW  Size (RW Data + ZI Data)              1640 (   1.60kB)
-    Total ROM Size (Code + RO Data + RW Data)       1036 (   1.01kB)
+    Total ROM Size (Code + RO Data + RW Data)       1028 (   1.00kB)
 
 ==============================================================================
 

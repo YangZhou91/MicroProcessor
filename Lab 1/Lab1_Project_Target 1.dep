@@ -20,4 +20,4 @@ I (C:\Program Files\Keil\ARM\CMSIS\Include\core_cmFunc.h)(0x520A4FF2)
 I (C:\Program Files\Keil\ARM\CMSIS\Include\core_cm4_simd.h)(0x520A4FF0)
 I (C:\Program Files\Keil\ARM\Inc\ST\STM32F4xx\system_stm32f4xx.h)(0x520A5034)
 F (.\src\startup_stm32f40xx.s)(0x52E687A4)(--cpu Cortex-M4.fp --pd "__EVAL SETA 1" -g --apcs=interwork -I "C:\Program Files\Keil\ARM\RV31\INC"-I "C:\Program Files\Keil\ARM\CMSIS\Include"-I "C:\Program Files\Keil\ARM\Inc\ST\STM32F4xx"--list .\lst\startup_stm32f40xx.lst --xref -o .\obj\startup_stm32f40xx.o --depend .\obj\startup_stm32f40xx.d)
-F (.\Fermat.s)(0x52E6B78C)()
+F (.\src\Fermat.s)(0x52E6C4EE)()

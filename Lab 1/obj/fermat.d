@@ -1,1 +1,1 @@
-.\obj\fermat.o: Fermat.s
+.\obj\fermat.o: src\Fermat.s

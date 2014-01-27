@@ -7,17 +7,20 @@ ARM Macro Assembler    Page 1
     1 00000000                 AREA             text, CODE, READONLY
     2 00000000                 EXPORT           fermat1
     3 00000000         fermat1
-    4 00000000 F04F 000A       MOV              R0, #10     ;// Assign 100 to r
-                                                            egister R0, assume 
-                                                            it's N.
-    5 00000004         
-    6 00000004         
-    7 00000004 4770            BX               LR          ;
-    8 00000006                 END                          ;
+    4 00000000 F04F 000A       MOV              R0, #10     ; Assign 100 to reg
+                                                            ister R0, assume it
+                                                            's N.
+    5 00000004 F090 0F00       TEQ              R0, #0      ; if (N == 0)
+    6 00000008 D9FF            BLS              neg
+    7 0000000A         neg
+    8 0000000A         
+    9 0000000A         
+   10 0000000A 4770            BX               LR          ;
+   11 0000000C                 END                          ;
 Command Line: --debug --xref --cpu=Cortex-M4.fp --apcs=interwork --depend=.\obj
 \fermat.d -o.\obj\fermat.o -I"C:\Program Files\Keil\ARM\RV31\INC" -I"C:\Program
  Files\Keil\ARM\CMSIS\Include" -I"C:\Program Files\Keil\ARM\Inc\ST\STM32F4xx" -
--predefine="__EVAL SETA 1" --list=.\lst\fermat.lst Fermat.s
+-predefine="__EVAL SETA 1" --list=.\lst\fermat.lst src\Fermat.s
 
 
 
@@ -28,17 +31,25 @@ fermat1 00000000
 
 Symbol: fermat1
    Definitions
-      At line 3 in file Fermat.s
+      At line 3 in file src\Fermat.s
    Uses
-      At line 2 in file Fermat.s
+      At line 2 in file src\Fermat.s
 Comment: fermat1 used once
+neg 0000000A
+
+Symbol: neg
+   Definitions
+      At line 7 in file src\Fermat.s
+   Uses
+      At line 6 in file src\Fermat.s
+Comment: neg used once
 text 00000000
 
 Symbol: text
    Definitions
-      At line 1 in file Fermat.s
+      At line 1 in file src\Fermat.s
    Uses
       None
 Comment: text unused
-2 symbols
-334 symbols in table
+3 symbols
+335 symbols in table

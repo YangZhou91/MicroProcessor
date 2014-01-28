@@ -1,6 +1,10 @@
 	AREA text, CODE, READONLY
 		EXPORT fermat1
 fermat1
+	GBLA	N			; Initlize the variable N
+						; GBLA is an instruction declears a global 
+						; arithmetic variable, and initalize its value to 0.
+;N	SETL	#10			; ERROR: Can not assign value to the N.
 	MOV		R0, #10		; Assign 100 to register R0, assume it's N.
 	TEQ		R0, #0		; Test is n is equal to zero
 	BMI		negative			; if (N < 0)
@@ -22,6 +26,7 @@ N_is_even
 	MOV 	R2, R0		; f = N/2
 	BNE		N_is_odd
 N_is_odd
+
 	
 	BX LR;
 	END;

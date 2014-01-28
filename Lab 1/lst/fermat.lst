@@ -1,0 +1,121 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000                 AREA             text, CODE, READONLY
+    2 00000000                 EXPORT           fermat1
+    3 00000000         fermat1
+    4 00000000         ; The following code is used to enable FPU
+    5 00000000         ; CPACR is located at address 0xE000ED88 LDR.W R0, =0xE0
+                       00ED88
+    6 00000000         ; Read CPACR
+    7 00000000 6801            LDR              R1, [R0]
+    8 00000002         ; Set bits 20-23 to enable CP10 and CP11 coprocessors OR
+                       R R1, R1, #(0xF << 20)
+    9 00000002         ; Write back the modified value to the CPACR
+   10 00000002 6001            STR              R1, [R0]    ; wait for store to
+                                                             complete
+   11 00000004 F3BF 8F4F       DSB
+   12 00000008         ;reset pipeline now the FPU is enabled 
+   13 00000008 F3BF 8F6F       ISB
+   14 0000000C         
+   15 0000000C                 GBLA             N           ; Initlize the vari
+                                                            able N
+   16 0000000C         ; GBLA is an instruction declears a global 
+   17 0000000C         ; arithmetic variable, and initalize its value to 0.
+   18 0000000C         ;N SETL #10   ; ERROR: Can not assign value to the N.
+   19 0000000C         
+   20 0000000C F04F 000A       MOV              R0, #10     ; Assign 100 to reg
+                                                            ister R0, assume it
+                                                            's N.
+   21 00000010 F090 0F00       TEQ              R0, #0      ; Test is n is equa
+                                                            l to zero
+   22 00000014 D4FF            BMI              negative    ; if (N < 0)
+   23 00000016         negative
+   24 00000016 F04F 0100       MOV              R1, #0      ; f1 = 0
+   25 0000001A F04F 0200       MOV              R2, #0      ; f2 = 0
+   26 0000001E         ;return f1 = f2 = 0
+   27 0000001E         
+   28 0000001E D0FF            BEQ              zero        ; if (N == 0)
+   29 00000020         zero
+   30 00000020         
+   31 00000020         ;return f1 = f2 = 0
+   32 00000020         
+   33 00000020 F010 0F01       TST              R0, #1      ; Even or Odd test,
+                                                             the Z flag will be
+                                                             set if R0 AND is z
+                                                            ero, i.e if R1 is e
+                                                            ven
+   34 00000024 D0FF            BEQ              N_is_even
+   35 00000026         N_is_even
+   36 00000026 F04F 0102       MOV              R1, #2      ; f1 = 2
+   37 0000002A EA4F 0090       LSR              R0, #2      ; N/2
+   38 0000002E 4602            MOV              R2, R0      ; f = N/2
+   39 00000030 D1FF            BNE              N_is_odd
+   40 00000032         N_is_odd
+   41 00000032         ; VSQRT R3, R0  ; x = sqrt(N)
+   42 00000032         
+   43 00000032 4770            BX               LR          ;
+   44 00000034                 END                          ;
+Command Line: --debug --xref --cpu=Cortex-M4.fp --apcs=interwork --depend=.\obj
+\fermat.d -o.\obj\fermat.o -I"C:\Program Files\Keil\ARM\RV31\INC" -I"C:\Program
+ Files\Keil\ARM\CMSIS\Include" -I"C:\Program Files\Keil\ARM\Inc\ST\STM32F4xx" -
+-predefine="__EVAL SETA 1" --list=.\lst\fermat.lst src\Fermat.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+N_is_even 00000026
+
+Symbol: N_is_even
+   Definitions
+      At line 35 in file src\Fermat.s
+   Uses
+      At line 34 in file src\Fermat.s
+Comment: N_is_even used once
+N_is_odd 00000032
+
+Symbol: N_is_odd
+   Definitions
+      At line 40 in file src\Fermat.s
+   Uses
+      At line 39 in file src\Fermat.s
+Comment: N_is_odd used once
+fermat1 00000000
+
+Symbol: fermat1
+   Definitions
+      At line 3 in file src\Fermat.s
+   Uses
+      At line 2 in file src\Fermat.s
+Comment: fermat1 used once
+negative 00000016
+
+Symbol: negative
+   Definitions
+      At line 23 in file src\Fermat.s
+   Uses
+      At line 22 in file src\Fermat.s
+Comment: negative used once
+text 00000000
+
+Symbol: text
+   Definitions
+      At line 1 in file src\Fermat.s
+   Uses
+      None
+Comment: text unused
+zero 00000020
+
+Symbol: zero
+   Definitions
+      At line 29 in file src\Fermat.s
+   Uses
+      At line 28 in file src\Fermat.s
+Comment: zero used once
+6 symbols
+339 symbols in table

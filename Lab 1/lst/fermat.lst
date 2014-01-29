@@ -1,0 +1,143 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000                 AREA             text, CODE, READONLY
+    2 00000000                 EXPORT           fermat1
+    3 00000000         fermat1
+    4 00000000         
+    5 00000000         ;GBLA N   ; Initlize the variable N
+    6 00000000         ; GBLA is an instruction declears a global 
+    7 00000000         ; arithmetic variable, and initalize its value to 0.
+    8 00000000 0000000A 
+                       N       EQU              10          ; ERROR: Can not as
+                                                            sign value to the N
+                                                            .
+    9 00000000 F241 2034       LDR              R0, =0x1234 ; Set R0 to 0x1234
+   10 00000004 F44F 707A       MOV              R0, #1000   ; Assign value to r
+                                                            egister R0, assume 
+                                                            it's N.
+   11 00000008 F090 0F00       TEQ              R0, #0      ; Test is n is equa
+                                                            l to zero
+   12 0000000C D4FF            BMI              negative    ; if (N < 0)
+   13 0000000E         negative
+   14 0000000E F04F 0100       MOV              R1, #0      ; f1 = 0
+   15 00000012 F04F 0200       MOV              R2, #0      ; f2 = 0
+   16 00000016         ;return f1 = f2 = 0
+   17 00000016         
+   18 00000016 D0FF            BEQ              zero        ; if (N == 0)
+   19 00000018         zero
+   20 00000018         
+   21 00000018         ;return f1 = f2 = 0
+   22 00000018         
+   23 00000018 F010 0F01       TST              R0, #1      ; Even or Odd test,
+                                                             the Z flag will be
+                                                             set if R0 AND is z
+                                                            ero, i.e if R1 is e
+                                                            ven
+   24 0000001C D000            BEQ              N_is_even
+   25 0000001E D104            BNE              N_is_odd
+   26 00000020         N_is_even
+   27 00000020 F04F 0102       MOV              R1, #2      ; f1 = 2
+   28 00000024 EA4F 0090       LSR              R0, #2      ; N/2
+   29 00000028 4602            MOV              R2, R0      ; f = N/2
+   30 0000002A         
+   31 0000002A         N_is_odd
+   32 0000002A EE00 0A10       VMOV             S0, R0      ; Assign the value 
+                                                            from R0 to the FPU 
+                                                            register.
+   33 0000002E EEF8 0AC0       VCVT.F32.S32     S1, S0      ; Convert N from si
+                                                            gned interger to fl
+                                                            oat
+   34 00000032 EEB1 1AE0       VSQRT.F32        S2, S1      ; x = squrt(N)
+   35 00000036         ;VCVT{01}.F32.S32 S3, S2 ; x = ceil(x), rounding mode 01
+                       , means ceiling. 
+   36 00000036 EE21 2A01       VMUL.F32         S4, S2, S2  ; temp = x^2
+   37 0000003A EE72 2A60       VSUB.F32         S5, S4, S1  ; y^2 = x^2 - N
+   38 0000003E EEB1 3AE2       VSQRT.F32        S6, S5      ;  y = sqrt(y^2)
+   39 00000042         
+   40 00000042 4770            BX               LR          ;
+   41 00000044                 END                          ;
+Command Line: --debug --xref --cpu=Cortex-M4.fp --apcs=interwork --depend=.\obj
+\fermat.d -o.\obj\fermat.o -I"C:\Program Files\Keil\ARM\RV31\INC" -I"C:\Program
+ Files\Keil\ARM\CMSIS\Include" -I"C:\Program Files\Keil\ARM\Inc\ST\STM32F4xx" -
+
+
+
+ARM Macro Assembler    Page 2 
+
+
+-predefine="__EVAL SETA 1" --list=.\lst\fermat.lst src\Fermat.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+N_is_even 00000020
+
+Symbol: N_is_even
+   Definitions
+      At line 26 in file src\Fermat.s
+   Uses
+      At line 24 in file src\Fermat.s
+Comment: N_is_even used once
+N_is_odd 0000002A
+
+Symbol: N_is_odd
+   Definitions
+      At line 31 in file src\Fermat.s
+   Uses
+      At line 25 in file src\Fermat.s
+Comment: N_is_odd used once
+fermat1 00000000
+
+Symbol: fermat1
+   Definitions
+      At line 3 in file src\Fermat.s
+   Uses
+      At line 2 in file src\Fermat.s
+Comment: fermat1 used once
+negative 0000000E
+
+Symbol: negative
+   Definitions
+      At line 13 in file src\Fermat.s
+   Uses
+      At line 12 in file src\Fermat.s
+Comment: negative used once
+text 00000000
+
+Symbol: text
+   Definitions
+      At line 1 in file src\Fermat.s
+   Uses
+      None
+Comment: text unused
+zero 00000018
+
+Symbol: zero
+   Definitions
+      At line 19 in file src\Fermat.s
+   Uses
+      At line 18 in file src\Fermat.s
+Comment: zero used once
+6 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Absolute symbols
+
+N 0000000A
+
+Symbol: N
+   Definitions
+      At line 8 in file src\Fermat.s
+   Uses
+      None
+Comment: N unused
+1 symbol
+339 symbols in table

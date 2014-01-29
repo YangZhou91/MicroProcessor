@@ -1,23 +1,13 @@
 	AREA text, CODE, READONLY
 		EXPORT fermat1
 fermat1
-; The following code is used to enable FPU
-; CPACR is located at address 0xE000ED88 LDR.W R0, =0xE000ED88
-; Read CPACR
-	LDR R1, [R0]
-; Set bits 20-23 to enable CP10 and CP11 coprocessors ORR R1, R1, #(0xF << 20)
-; Write back the modified value to the CPACR
-	STR R1, [R0]; wait for store to complete
-	DSB
-;reset pipeline now the FPU is enabled 
-	ISB
 	
 	GBLA	N			; Initlize the variable N
 						; GBLA is an instruction declears a global 
 						; arithmetic variable, and initalize its value to 0.
 ;N	SETL	#10			; ERROR: Can not assign value to the N.
 	
-	MOV		R0, #10		; Assign 100 to register R0, assume it's N.
+	MOV		R0, #1000		; Assign value to register R0, assume it's N.
 	TEQ		R0, #0		; Test is n is equal to zero
 	BMI		negative			; if (N < 0)
 negative	
@@ -38,7 +28,9 @@ N_is_even
 	MOV 	R2, R0		; f = N/2
 	BNE		N_is_odd
 N_is_odd
-;	VSQRT	R3, R0		; x = sqrt(N)
+	VMOV 	S0, R0		; Store N into a single-precision floating point register.
+	VMOV 	S1, #0		;
+	VSQRT	S1, S0		; x = sqrt(N)
 	
 	BX LR;
 	END;

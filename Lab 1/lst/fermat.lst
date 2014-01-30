@@ -25,50 +25,75 @@ ARM Macro Assembler    Page 1
    13 0000000E         negative
    14 0000000E F04F 0100       MOV              R1, #0      ; f1 = 0
    15 00000012 F04F 0200       MOV              R2, #0      ; f2 = 0
-   16 00000016         ;return f1 = f2 = 0
-   17 00000016         
-   18 00000016 D0FF            BEQ              zero        ; if (N == 0)
-   19 00000018         zero
-   20 00000018         
-   21 00000018         ;return f1 = f2 = 0
-   22 00000018         
-   23 00000018 F010 0F01       TST              R0, #1      ; Even or Odd test,
+   16 00000016         
+   17 00000016 D0FF            BEQ              zero        ; if (N == 0), go t
+                                                            o brach zero
+   18 00000018         zero
+   19 00000018 F04F 0100       MOV              R1, #0      ; f1 = 0
+   20 0000001C F04F 0200       MOV              R2, #0      ; f2 = 0
+   21 00000020         
+   22 00000020 F010 0F01       TST              R0, #1      ; Even or Odd test,
                                                              the Z flag will be
                                                              set if R0 AND is z
                                                             ero, i.e if R1 is e
                                                             ven
-   24 0000001C D000            BEQ              N_is_even
-   25 0000001E D104            BNE              N_is_odd
-   26 00000020         N_is_even
-   27 00000020 F04F 0102       MOV              R1, #2      ; f1 = 2
-   28 00000024 EA4F 0090       LSR              R0, #2      ; N/2
-   29 00000028 4602            MOV              R2, R0      ; f = N/2
-   30 0000002A         
-   31 0000002A         N_is_odd
-   32 0000002A EE00 0A10       VMOV             S0, R0      ; Assign the value 
+   23 00000024 D000            BEQ              N_is_even   ; Go to branch N_is
+                                                            _even 
+   24 00000026 D104            BNE              N_is_odd    ; Go to branch N_is
+                                                            _odd
+   25 00000028         N_is_even
+   26 00000028 F04F 0102       MOV              R1, #2      ; f1 = 2
+   27 0000002C EA4F 0090       LSR              R0, #2      ; N/2
+   28 00000030 4602            MOV              R2, R0      ; f2 = N/2
+   29 00000032         
+   30 00000032         N_is_odd
+   31 00000032 EE00 0A10       VMOV             S0, R0      ; Assign the value 
                                                             from R0 to the FPU 
                                                             register.
-   33 0000002E EEF8 0AC0       VCVT.F32.S32     S1, S0      ; Convert N from si
+   32 00000036 EEF8 0AC0       VCVT.F32.S32     S1, S0      ; Convert N from si
                                                             gned interger to fl
                                                             oat
-   34 00000032 EEB1 1AE0       VSQRT.F32        S2, S1      ; x = squrt(N)
-   35 00000036         ;VCVT{01}.F32.S32 S3, S2 ; x = ceil(x), rounding mode 01
-                       , means ceiling. 
-   36 00000036 EE21 2A01       VMUL.F32         S4, S2, S2  ; temp = x^2
-   37 0000003A EE72 2A60       VSUB.F32         S5, S4, S1  ; y^2 = x^2 - N
-   38 0000003E EEB1 3AE2       VSQRT.F32        S6, S5      ;  y = sqrt(y^2)
-   39 00000042         
-   40 00000042 4770            BX               LR          ;
-   41 00000044                 END                          ;
-Command Line: --debug --xref --cpu=Cortex-M4.fp --apcs=interwork --depend=.\obj
-\fermat.d -o.\obj\fermat.o -I"C:\Program Files\Keil\ARM\RV31\INC" -I"C:\Program
- Files\Keil\ARM\CMSIS\Include" -I"C:\Program Files\Keil\ARM\Inc\ST\STM32F4xx" -
+   33 0000003A EEB1 1AE0       VSQRT.F32        S2, S1      ; x = squrt(N)
+   34 0000003E         ;VCVT.F32.S32 S3, S2  ; x = ceil(x), rounding mode 01, m
+                       eans ceiling. 
+   35 0000003E EE21 2A01       VMUL.F32         S4, S2, S2  ; temp = x^2
+   36 00000042 EE72 2A60       VSUB.F32         S5, S4, S1  ; y^2 = x^2 - N
+   37 00000046 EEB1 3AE2       VSQRT.F32        S6, S5      ; y = sqrt(y^2), th
+                                                            e default rounding 
+                                                            is to 0.
+   38 0000004A         ;conversoin needed
+   39 0000004A EE63 3A03       VMUL.F32         S7, S6, S6  ; Compute the y^2 a
 
 
 
 ARM Macro Assembler    Page 2 
 
 
+                                                            gain
+   40 0000004E EEF4 3A62       VCMP.F32         S7, S5      ; Test equivalence 
+                                                            of two y^2
+   41 00000052         
+   42 00000052 D103            BNE              while_loop
+   43 00000054 F04F 0401       MOV              R4, #1      ; Assign 1 to an in
+                                                            teger register.
+   44 00000058 EE04 4A10       VMOV             S8, R4      ; Assign 1 to a 32-
+                                                            bit register
+   45 0000005C         while_loop
+   46 0000005C EE31 1A04       VADD.F32         S2, S2, S8  ; x = x + 1
+   47 00000060 EE21 2A01       VMUL.F32         S4, S2, S2  ; temp = x^2
+   48 00000064 EE72 2A60       VSUB.F32         S5, S4, S1  ; y^2 = x^2 - N
+   49 00000068         ;end of the while loop
+   50 00000068         
+   51 00000068 EEB1 3AE2       VSQRT.F32        S6, S5      ; y = sqrt(y^2), th
+                                                            e default rounding 
+                                                            is to 0.
+   52 0000006C EEFD 3AC3       VCVT.S32.F32     S7, S6      ; Conversion from f
+                                                            loating to integer
+   53 00000070 4770            BX               LR          ;
+   54 00000072                 END                          ;
+Command Line: --debug --xref --cpu=Cortex-M4.fp --apcs=interwork --depend=.\obj
+\fermat.d -o.\obj\fermat.o -I"C:\Program Files\Keil\ARM\RV31\INC" -I"C:\Program
+ Files\Keil\ARM\CMSIS\Include" -I"C:\Program Files\Keil\ARM\Inc\ST\STM32F4xx" -
 -predefine="__EVAL SETA 1" --list=.\lst\fermat.lst src\Fermat.s
 
 
@@ -76,21 +101,21 @@ ARM Macro Assembler    Page 2
 ARM Macro Assembler    Page 1 Alphabetic symbol ordering
 Relocatable symbols
 
-N_is_even 00000020
+N_is_even 00000028
 
 Symbol: N_is_even
    Definitions
-      At line 26 in file src\Fermat.s
+      At line 25 in file src\Fermat.s
    Uses
-      At line 24 in file src\Fermat.s
+      At line 23 in file src\Fermat.s
 Comment: N_is_even used once
-N_is_odd 0000002A
+N_is_odd 00000032
 
 Symbol: N_is_odd
    Definitions
-      At line 31 in file src\Fermat.s
+      At line 30 in file src\Fermat.s
    Uses
-      At line 25 in file src\Fermat.s
+      At line 24 in file src\Fermat.s
 Comment: N_is_odd used once
 fermat1 00000000
 
@@ -116,15 +141,23 @@ Symbol: text
    Uses
       None
 Comment: text unused
+while_loop 0000005C
+
+Symbol: while_loop
+   Definitions
+      At line 45 in file src\Fermat.s
+   Uses
+      At line 42 in file src\Fermat.s
+Comment: while_loop used once
 zero 00000018
 
 Symbol: zero
    Definitions
-      At line 19 in file src\Fermat.s
-   Uses
       At line 18 in file src\Fermat.s
+   Uses
+      At line 17 in file src\Fermat.s
 Comment: zero used once
-6 symbols
+7 symbols
 
 
 
@@ -140,4 +173,4 @@ Symbol: N
       None
 Comment: N unused
 1 symbol
-339 symbols in table
+340 symbols in table

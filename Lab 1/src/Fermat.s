@@ -61,8 +61,7 @@ while_loop
 	VCVT.F32.U32 		S6, S6 
 	VMUL.F32			S6, S6, S6	; Compute the y^2 again
 	VCMP.F32			S5, S6		; Test equivalence of two y^2
-	;VSUB.F32            S8, S5, S6
-	;VCMP.F32            S8, #0.0	
+	VMRS APSR_nzcv, FPSCR	
 	
 	BEQ					Final
 	VADDGT.F32			S1, S1, S7 	; x = x + 1
@@ -71,6 +70,7 @@ while_loop
 	BGT					while_loop
 	
 Final	
+	VSQRT.F32			S6, S6
 	VADDEQ.F32          S1, S1, S6
 	VSUBEQ.F32	        S2, S1, S6
 	

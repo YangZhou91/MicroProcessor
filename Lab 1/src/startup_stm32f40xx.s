@@ -188,12 +188,12 @@ __Vectors_Size  EQU  __Vectors_End - __Vectors
 Reset_Handler    PROC
                  EXPORT  Reset_Handler             [WEAK]
         ;IMPORT  SystemInit
-        ;IMPORT  main
-		IMPORT 	fermat1
+        IMPORT  main
+		;IMPORT 	lcm
                  ;LDR     R0, =SystemInit
                  ;BLX     R0
-                 ;LDR     R0, =main
-				 LDR 	 R0, =fermat1
+                 LDR     R0, =main
+				 ;LDR 	 R0, =lcm
                  BX      R0
                  ENDP
 

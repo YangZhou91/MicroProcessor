@@ -418,6 +418,21 @@
               <FileType>2</FileType>
               <FilePath>.\src\startup_stm32f40xx.s</FilePath>
             </File>
+            <File>
+              <FileName>Fermat.s</FileName>
+              <FileType>2</FileType>
+              <FilePath>.\src\Fermat.s</FilePath>
+            </File>
+            <File>
+              <FileName>gcd.s</FileName>
+              <FileType>2</FileType>
+              <FilePath>.\src\gcd.s</FilePath>
+            </File>
+            <File>
+              <FileName>lcm.s</FileName>
+              <FileType>2</FileType>
+              <FilePath>.\src\lcm.s</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>

@@ -494,12 +494,12 @@ ARM Macro Assembler    Page 8
   189 0000000C                 EXPORT           Reset_Handler             [WEAK
 ]
   190 0000000C         ;IMPORT  SystemInit
-  191 0000000C         ;IMPORT  main
-  192 0000000C                 IMPORT           fermat1
+  191 0000000C                 IMPORT           main
+  192 0000000C         ;IMPORT  lcm
   193 0000000C         ;LDR     R0, =SystemInit
   194 0000000C         ;BLX     R0
-  195 0000000C         ;LDR     R0, =main
-  196 0000000C 4808            LDR              R0, =fermat1
+  195 0000000C 4808            LDR              R0, =main
+  196 0000000E         ;LDR   R0, =lcm
   197 0000000E 4700            BX               R0
   198 00000010                 ENDP
   199 00000010         
@@ -1982,13 +1982,13 @@ Symbol: __use_two_region_memory
    Uses
       None
 Comment: __use_two_region_memory unused
-fermat1 00000000
+main 00000000
 
-Symbol: fermat1
+Symbol: main
    Definitions
-      At line 192 in file src\startup_stm32f40xx.s
+      At line 191 in file src\startup_stm32f40xx.s
    Uses
-      At line 196 in file src\startup_stm32f40xx.s
-Comment: fermat1 used once
+      At line 195 in file src\startup_stm32f40xx.s
+Comment: main used once
 2 symbols
 446 symbols in table

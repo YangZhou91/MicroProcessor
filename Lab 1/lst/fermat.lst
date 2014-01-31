@@ -7,93 +7,133 @@ ARM Macro Assembler    Page 1
     1 00000000                 AREA             text, CODE, READONLY
     2 00000000                 EXPORT           fermat1
     3 00000000         fermat1
-    4 00000000         
-    5 00000000         ;GBLA N   ; Initlize the variable N
-    6 00000000         ; GBLA is an instruction declears a global 
-    7 00000000         ; arithmetic variable, and initalize its value to 0.
-    8 00000000 0000000A 
-                       N       EQU              10          ; ERROR: Can not as
-                                                            sign value to the N
-                                                            .
-    9 00000000 F241 2034       LDR              R0, =0x1234 ; Set R0 to 0x1234
-   10 00000004 F44F 707A       MOV              R0, #1000   ; Assign value to r
-                                                            egister R0, assume 
-                                                            it's N.
-   11 00000008 F090 0F00       TEQ              R0, #0      ; Test is n is equa
-                                                            l to zero
-   12 0000000C D4FF            BMI              negative    ; if (N < 0)
-   13 0000000E         negative
-   14 0000000E F04F 0100       MOV              R1, #0      ; f1 = 0
-   15 00000012 F04F 0200       MOV              R2, #0      ; f2 = 0
-   16 00000016         
-   17 00000016 D0FF            BEQ              zero        ; if (N == 0), go t
-                                                            o brach zero
-   18 00000018         zero
-   19 00000018 F04F 0100       MOV              R1, #0      ; f1 = 0
-   20 0000001C F04F 0200       MOV              R2, #0      ; f2 = 0
-   21 00000020         
-   22 00000020 F010 0F01       TST              R0, #1      ; Even or Odd test,
+    4 00000000         ; The following code is used to enable FPU
+    5 00000000         ; CPACR is located at address 0xE000ED88 
+    6 00000000 F8DF 00A4       LDR.W            R0, =0xE000ED88
+    7 00000004         ; Read CPACR
+    8 00000004 6801            LDR              R1, [R0]
+    9 00000006         ; Set bits 20-23 to enable CP10 and CP11 coprocessors 
+   10 00000006 F441 0170       ORR              R1, R1, #(0xF << 20)
+   11 0000000A         ; Write back the modified value to the CPACR
+   12 0000000A 6001            STR              R1, [R0]    ; wait for store to
+                                                             complete
+   13 0000000C F3BF 8F4F       DSB
+   14 00000010         ;reset pipeline now the FPU is enabled
+   15 00000010 F3BF 8F6F       ISB
+   16 00000014         
+   17 00000014 F04F 0011       MOV              R0, #17     ; Assign 100 to reg
+                                                            ister R0, assume it
+                                                            's N.
+   18 00000018 2800            CMP              R0, #0
+   19 0000001A BFDC 2106       MOVLE            R1, #6      ; f1 = 0 ; for debu
+                                                            g purpose used 6 an
+                                                            d 7 to see register
+                                                             values changing fr
+                                                            om zero -> somethin
+                                                            g
+   20 0000001E 2207            MOVLE            R2, #7      ; f2 = 0
+   21 00000020 DA00            BGE              Odd_Even_Check
+   22 00000022 4770            BX               LR
+   23 00000024         
+   24 00000024         Odd_Even_Check
+   25 00000024 F010 0F01       TST              R0, #1      ; Even or Odd test,
                                                              the Z flag will be
                                                              set if R0 AND is z
                                                             ero, i.e if R1 is e
                                                             ven
-   23 00000024 D000            BEQ              N_is_even   ; Go to branch N_is
-                                                            _even 
-   24 00000026 D104            BNE              N_is_odd    ; Go to branch N_is
-                                                            _odd
-   25 00000028         N_is_even
-   26 00000028 F04F 0102       MOV              R1, #2      ; f1 = 2
-   27 0000002C EA4F 0090       LSR              R0, #2      ; N/2
-   28 00000030 4602            MOV              R2, R0      ; f2 = N/2
-   29 00000032         
-   30 00000032         N_is_odd
-   31 00000032 EE00 0A10       VMOV             S0, R0      ; Assign the value 
-                                                            from R0 to the FPU 
-                                                            register.
-   32 00000036 EEF8 0AC0       VCVT.F32.S32     S1, S0      ; Convert N from si
-                                                            gned interger to fl
-                                                            oat
-   33 0000003A EEB1 1AE0       VSQRT.F32        S2, S1      ; x = squrt(N)
-   34 0000003E         ;VCVT.F32.S32 S3, S2  ; x = ceil(x), rounding mode 01, m
-                       eans ceiling. 
-   35 0000003E EE21 2A01       VMUL.F32         S4, S2, S2  ; temp = x^2
-   36 00000042 EE72 2A60       VSUB.F32         S5, S4, S1  ; y^2 = x^2 - N
-   37 00000046 EEB1 3AE2       VSQRT.F32        S6, S5      ; y = sqrt(y^2), th
-                                                            e default rounding 
-                                                            is to 0.
-   38 0000004A         ;conversoin needed
-   39 0000004A EE63 3A03       VMUL.F32         S7, S6, S6  ; Compute the y^2 a
+   26 00000028 D000            BEQ              N_is_even
+   27 0000002A D104            BNE              N_is_odd
+   28 0000002C         
+   29 0000002C         N_is_even
+   30 0000002C F04F 0102       MOV              R1, #2      ; f1 = 2
+   31 00000030 FBB0 F2F1       UDIV             R2, R0, R1
+   32 00000034 D1FF            BNE              N_is_odd
+   33 00000036         
+   34 00000036         N_is_odd
+   35 00000036 EE00 0A10       VMOV             S0, R0      ; S0 -> N
+   36 0000003A EEF7 0A00       VMOV.F32         S1, #1      ; S1 contains 1.0
+   37 0000003E         
+   38 0000003E EEB8 0A40       VCVT.F32.U32     S0, S0      ; convert N from in
+                                                            t to float
+   39 00000042 EEB1 1AC0       VSQRT.F32        S2, S0      ; compute sqrt of N
+                                                             
+   40 00000046         
+   41 00000046 EEFC 1AC1       VCVT.U32.F32     S3, S2      ; convert sqrt of N
+                                                             from float to near
+                                                            est uint
+   42 0000004A EEF8 1A61       VCVT.F32.U32     S3, S3      ; convert it back t
+                                                            o float uint to flo
 
 
 
 ARM Macro Assembler    Page 2 
 
 
-                                                            gain
-   40 0000004E EEF4 3A62       VCMP.F32         S7, S5      ; Test equivalence 
-                                                            of two y^2
-   41 00000052         
-   42 00000052 D103            BNE              while_loop
-   43 00000054 F04F 0401       MOV              R4, #1      ; Assign 1 to an in
-                                                            teger register.
-   44 00000058 EE04 4A10       VMOV             S8, R4      ; Assign 1 to a 32-
-                                                            bit register
-   45 0000005C         while_loop
-   46 0000005C EE31 1A04       VADD.F32         S2, S2, S8  ; x = x + 1
-   47 00000060 EE21 2A01       VMUL.F32         S4, S2, S2  ; temp = x^2
-   48 00000064 EE72 2A60       VSUB.F32         S5, S4, S1  ; y^2 = x^2 - N
-   49 00000068         ;end of the while loop
-   50 00000068         
-   51 00000068 EEB1 3AE2       VSQRT.F32        S6, S5      ; y = sqrt(y^2), th
+                                                            at
+   43 0000004E         
+   44 0000004E EEB4 1A61       VCMP.F32         S2, S3      ; comparison betwee
+                                                            n squartroot and it
+                                                            s int
+   45 00000052 BFC8 EE70 
+              0AA1             VADDGT.F32       S1, S1, S3  ; positive result s
+                                                            ets FPSCR flag to G
+                                                            T: 0010 -> weird
+   46 00000058 BF08 EEF0 
+              0A61             VMOVEQ.F32       S1, S3      ; equal comparison 
+                                                            sets FPSCR to EQ: 0
+                                                            110
+   47 0000005E         ; register S1 now has the ceiling value          
+   48 0000005E         ;-------------------------------------------------------
+                       --------------------------
+   49 0000005E         
+   50 0000005E EE60 2AA0       VMUL.F32         S5, S1, S1  ; temp = x^2 -> S5
+   51 00000062 EE72 2AC0       VSUB.F32         S5, S5, S0  ; y^2 = x^2 - N -> 
+                                                            S5 to be y^2
+   52 00000066         
+   53 00000066         ;MOV     R4, #1  ; Assign 1 to an integer register.
+   54 00000066 EEF7 3A00       VMOV.F32         S7, #1      ; Assign 1 to a 32-
+                                                            bit register reg co
+                                                            ntains 1
+   55 0000006A E7FF            B                while_loop
+   56 0000006C         
+   57 0000006C         while_loop
+   58 0000006C EEB1 3AE2       VSQRT.F32        S6, S5      ; y = sqrt(y^2), th
                                                             e default rounding 
                                                             is to 0.
-   52 0000006C EEFD 3AC3       VCVT.S32.F32     S7, S6      ; Conversion from f
-                                                            loating to integer
-   53 00000070 4770            BX               LR          ;
-   54 00000072                 END                          ;
+   59 00000070         ;conversoin needed
+   60 00000070 EEBC 3AC3       VCVT.U32.F32     S6, S6
+   61 00000074 EEB8 3A43       VCVT.F32.U32     S6, S6
+   62 00000078 EE23 3A03       VMUL.F32         S6, S6, S6  ; Compute the y^2 a
+                                                            gain
+   63 0000007C EEF4 2A43       VCMP.F32         S5, S6      ; Test equivalence 
+                                                            of two y^2
+   64 00000080 EEF1 FA10       VMRS             APSR_nzcv, FPSCR
+   65 00000084         
+   66 00000084 D007            BEQ              Final
+   67 00000086 BFC2 EE70 
+              0AA3             VADDGT.F32       S1, S1, S7  ; x = x + 1
+   68 0000008C EE20 2AA0       VMULGT.F32       S4, S1, S1  ; temp = x^2 -> S4
+   69 00000090 EE72 2A40       VSUBGT.F32       S5, S4, S0  ; y^2 = x^2 - N
+   70 00000094 DCEA            BGT              while_loop
+   71 00000096         
+   72 00000096         Final
+   73 00000096 EEB1 3AC3       VSQRT.F32        S6, S6
+   74 0000009A BF04 EE70 
+              0A83             VADDEQ.F32       S1, S1, S6
+   75 000000A0 EE30 1AC3       VSUBEQ.F32       S2, S1, S6
+   76 000000A4         
+   77 000000A4 4770            BX               LR          ;
+   78 000000A6                 END                          ;
+              00 00 E000ED88 
 Command Line: --debug --xref --cpu=Cortex-M4.fp --apcs=interwork --depend=.\obj
 \fermat.d -o.\obj\fermat.o -I"C:\Program Files\Keil\ARM\RV31\INC" -I"C:\Program
  Files\Keil\ARM\CMSIS\Include" -I"C:\Program Files\Keil\ARM\Inc\ST\STM32F4xx" -
+
+
+
+ARM Macro Assembler    Page 3 
+
+
 -predefine="__EVAL SETA 1" --list=.\lst\fermat.lst src\Fermat.s
 
 
@@ -101,22 +141,39 @@ Command Line: --debug --xref --cpu=Cortex-M4.fp --apcs=interwork --depend=.\obj
 ARM Macro Assembler    Page 1 Alphabetic symbol ordering
 Relocatable symbols
 
-N_is_even 00000028
+Final 00000096
+
+Symbol: Final
+   Definitions
+      At line 72 in file src\Fermat.s
+   Uses
+      At line 66 in file src\Fermat.s
+Comment: Final used once
+N_is_even 0000002C
 
 Symbol: N_is_even
    Definitions
-      At line 25 in file src\Fermat.s
+      At line 29 in file src\Fermat.s
    Uses
-      At line 23 in file src\Fermat.s
+      At line 26 in file src\Fermat.s
 Comment: N_is_even used once
-N_is_odd 00000032
+N_is_odd 00000036
 
 Symbol: N_is_odd
    Definitions
-      At line 30 in file src\Fermat.s
+      At line 34 in file src\Fermat.s
    Uses
+      At line 27 in file src\Fermat.s
+      At line 32 in file src\Fermat.s
+
+Odd_Even_Check 00000024
+
+Symbol: Odd_Even_Check
+   Definitions
       At line 24 in file src\Fermat.s
-Comment: N_is_odd used once
+   Uses
+      At line 21 in file src\Fermat.s
+Comment: Odd_Even_Check used once
 fermat1 00000000
 
 Symbol: fermat1
@@ -125,14 +182,6 @@ Symbol: fermat1
    Uses
       At line 2 in file src\Fermat.s
 Comment: fermat1 used once
-negative 0000000E
-
-Symbol: negative
-   Definitions
-      At line 13 in file src\Fermat.s
-   Uses
-      At line 12 in file src\Fermat.s
-Comment: negative used once
 text 00000000
 
 Symbol: text
@@ -141,36 +190,20 @@ Symbol: text
    Uses
       None
 Comment: text unused
-while_loop 0000005C
+while_loop 0000006C
 
 Symbol: while_loop
    Definitions
-      At line 45 in file src\Fermat.s
+      At line 57 in file src\Fermat.s
    Uses
-      At line 42 in file src\Fermat.s
-Comment: while_loop used once
-zero 00000018
+      At line 55 in file src\Fermat.s
+      At line 70 in file src\Fermat.s
 
-Symbol: zero
-   Definitions
-      At line 18 in file src\Fermat.s
-   Uses
-      At line 17 in file src\Fermat.s
-Comment: zero used once
 7 symbols
 
 
 
-ARM Macro Assembler    Page 1 Alphabetic symbol ordering
-Absolute symbols
+ARM Macro Assembler    Page 2 Alphabetic symbol ordering
+Relocatable symbols
 
-N 0000000A
-
-Symbol: N
-   Definitions
-      At line 8 in file src\Fermat.s
-   Uses
-      None
-Comment: N unused
-1 symbol
-340 symbols in table
+341 symbols in table

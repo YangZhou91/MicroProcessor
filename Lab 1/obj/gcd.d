@@ -1,1 +1,1 @@
-.\obj\gcd.o: src\gcd.s
+.\obj\gcd.o: src\GCD.s

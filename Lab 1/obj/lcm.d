@@ -1,1 +1,1 @@
-.\obj\lcm.o: src\lcm.s
+.\obj\lcm.o: src\LCM.s

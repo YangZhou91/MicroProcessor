@@ -5,96 +5,109 @@ ARM Macro Assembler    Page 1
 
 
     1 00000000                 AREA             text, CODE, READONLY
-    2 00000000                 EXPORT           lcm
-    3 00000000         lcm
-    4 00000000         ; MOV  R1, #32  ; Initlize the first number
-    5 00000000         ; MOV  R2, #45  ; Initlize the second number
-    6 00000000 FB00 F301       MUL              R3, R0, R1  ; Calculate the pro
+    2 00000000                 EXPORT           LCM
+    3 00000000                 IMPORT           GCD
+    4 00000000         LCM
+    5 00000000 FB00 F301       MUL              R3, R0, R1  ; Calculate the pro
                                                             duct of R0 and R1
-    7 00000004         
-    8 00000004 2800            CMP              R0, #0      ; Compare the R0 wi
-                                                            th 0   
-    9 00000006 D00C            BEQ              output_zero
-   10 00000008         
-   11 00000008 2900            CMP              R1, #0
-   12 0000000A D00A            BEQ              output_zero
-   13 0000000C         
-   14 0000000C E7FF            B                calculate_gcd
-   15 0000000E         
-   16 0000000E         calculate_gcd
-   17 0000000E 4288            CMP              R0, R1      ; Compare two numbe
-                                                            rs
-   18 00000010 BFCC 1A40       SUBGT            R0, R0, R1  ; R0 = R0-R1 if R0 
-                                                            is greater
-   19 00000014 1A09            SUBLE            R1, R1, R0  ; R1 = R1 - R0 if R
-                                                            1 is greater
-   20 00000016 4288            CMP              R0, R1
-   21 00000018 D1F9            BNE              calculate_gcd
-   22 0000001A D0FF            BEQ              calculate_lcm
-   23 0000001C         
-   24 0000001C         calculate_lcm
-   25 0000001C         
-   26 0000001C FB93 F0F1       SDIV             R0, R3, R1  ; The LCM is the qu
+    6 00000004         
+    7 00000004 2800            CMP              R0, #0      ; Compare the R0 wi
+                                                            th 0
+    8 00000006 D00A            BEQ              output_zero
+    9 00000008         
+   10 00000008 2900            CMP              R1, #0
+   11 0000000A D008            BEQ              output_zero
+   12 0000000C         
+   13 0000000C E7FF            B                calculate_gcd
+   14 0000000E         
+   15 0000000E         calculate_gcd
+   16 0000000E 4675            MOV              R5, LR      ; Save address of L
+                                                            R
+   17 00000010 4C04            LDR              R4, =GCD    ; Branch out to GCD
+                                                            
+   18 00000012 47A0            BLX              R4          ; --
+   19 00000014 46AE            MOV              LR, R5      ; Restore the addre
+                                                            ss in LR
+   20 00000016 E7FF            B                calculate_lcm
+   21 00000018         
+   22 00000018         calculate_lcm
+   23 00000018         
+   24 00000018 FB93 F0F1       SDIV             R0, R3, R1  ; The LCM is the qu
                                                             otient, stored in R
                                                             0
-   27 00000020 4770            BX               LR
-   28 00000022         
-   29 00000022         output_zero
-   30 00000022 F04F 0000       MOV              R0, #0      ; Store 0 into R3, 
+   25 0000001C 4770            BX               LR
+   26 0000001E         
+   27 0000001E         output_zero
+   28 0000001E F04F 0000       MOV              R0, #0      ; Store 0 into R3, 
                                                             as output.
-   31 00000026 4770            BX               LR
-   32 00000028                 END                          ;
+   29 00000022 4770            BX               LR
+   30 00000024                 END                          ;
+              00000000 
 Command Line: --debug --xref --cpu=Cortex-M4.fp --apcs=interwork --depend=.\obj
 \lcm.d -o.\obj\lcm.o -I"C:\Program Files\Keil\ARM\RV31\INC" -I"C:\Program Files
 \Keil\ARM\CMSIS\Include" -I"C:\Program Files\Keil\ARM\Inc\ST\STM32F4xx" --prede
-fine="__EVAL SETA 1" --list=.\lst\lcm.lst src\lcm.s
+fine="__EVAL SETA 1" --list=.\lst\lcm.lst src\LCM.s
 
 
 
 ARM Macro Assembler    Page 1 Alphabetic symbol ordering
 Relocatable symbols
 
+LCM 00000000
+
+Symbol: LCM
+   Definitions
+      At line 4 in file src\LCM.s
+   Uses
+      At line 2 in file src\LCM.s
+Comment: LCM used once
 calculate_gcd 0000000E
 
 Symbol: calculate_gcd
    Definitions
-      At line 16 in file src\lcm.s
+      At line 15 in file src\LCM.s
    Uses
-      At line 14 in file src\lcm.s
-      At line 21 in file src\lcm.s
-
-calculate_lcm 0000001C
+      At line 13 in file src\LCM.s
+Comment: calculate_gcd used once
+calculate_lcm 00000018
 
 Symbol: calculate_lcm
    Definitions
-      At line 24 in file src\lcm.s
+      At line 22 in file src\LCM.s
    Uses
-      At line 22 in file src\lcm.s
+      At line 20 in file src\LCM.s
 Comment: calculate_lcm used once
-lcm 00000000
-
-Symbol: lcm
-   Definitions
-      At line 3 in file src\lcm.s
-   Uses
-      At line 2 in file src\lcm.s
-Comment: lcm used once
-output_zero 00000022
+output_zero 0000001E
 
 Symbol: output_zero
    Definitions
-      At line 29 in file src\lcm.s
+      At line 27 in file src\LCM.s
    Uses
-      At line 9 in file src\lcm.s
-      At line 12 in file src\lcm.s
+      At line 8 in file src\LCM.s
+      At line 11 in file src\LCM.s
 
 text 00000000
 
 Symbol: text
    Definitions
-      At line 1 in file src\lcm.s
+      At line 1 in file src\LCM.s
    Uses
       None
 Comment: text unused
 5 symbols
-337 symbols in table
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+External symbols
+
+GCD 00000000
+
+Symbol: GCD
+   Definitions
+      At line 3 in file src\LCM.s
+   Uses
+      At line 17 in file src\LCM.s
+Comment: GCD used once
+1 symbol
+340 symbols in table

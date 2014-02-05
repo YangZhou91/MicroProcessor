@@ -5,81 +5,89 @@ ARM Macro Assembler    Page 1
 
 
     1 00000000                 AREA             text, CODE, READONLY
-    2 00000000                 EXPORT           gcd
-    3 00000000         gcd
-    4 00000000         
-    5 00000000 F04F 0145       MOV              R1, #69     ; Initlize the firs
-                                                            t number in R0 
-    6 00000004 F04F 0200       MOV              R2, #0      ; Initlize the seco
-                                                            nd number in R1
-    7 00000008 2900            CMP              R1, #0      ; Compare the R0 wi
-                                                            th 0   
-    8 0000000A D009            BEQ              output_zero
-    9 0000000C         
-   10 0000000C         
-   11 0000000C 2A00            CMP              R2, #0
-   12 0000000E D007            BEQ              output_zero
-   13 00000010         
-   14 00000010 E7FF            B                calculate_gcd
-   15 00000012         calculate_gcd
-   16 00000012 4291            CMP              R1, R2      ; Compare two numbe
+    2 00000000                 EXPORT           GCD
+    3 00000000         GCD
+    4 00000000 2800            CMP              R0, #0      ; Compare the R0 wi
+                                                            th 0
+    5 00000002 D00B            BEQ              output_zero
+    6 00000004         
+    7 00000004         
+    8 00000004 2900            CMP              R1, #0
+    9 00000006 D009            BEQ              output_zero
+   10 00000008         
+   11 00000008 E7FF            B                calculate_gcd
+   12 0000000A         calculate_gcd
+   13 0000000A 4288            CMP              R0, R1      ; Compare two numbe
                                                             rs
-   17 00000014 BFCC 1A89       SUBGT            R1, R1, R2  ; R0 = R0-R1 if R0 
+   14 0000000C BFCC 1A40       SUBGT            R0, R0, R1  ; R0 = R0-R1 if R0 
                                                             is greater
-   18 00000018 1A52            SUBLE            R2, R2, R1  ; R1 = R1 - R0 if R
+   15 00000010 1A09            SUBLE            R1, R1, R0  ; R1 = R1 - R0 if R
                                                             1 is greater
-   19 0000001A D1FA            BNE              calculate_gcd
-   20 0000001C BF08 4608       MOVEQ            R0, R1      ; Store R10 into R0
+   16 00000012 4288            CMP              R0, R1
+   17 00000014 D1F9            BNE              calculate_gcd
+   18 00000016 BF08 4608       MOVEQ            R0, R1      ; Store R10 into R0
                                                             
-   21 00000020         
-   22 00000020         output_zero
-   23 00000020 F04F 0000       MOV              R0, #0      ; Store 0 into R3, 
+   19 0000001A D002            BEQ              EndLoop
+   20 0000001C         
+   21 0000001C         output_zero
+   22 0000001C F04F 0000       MOV              R0, #0      ; Store 0 into R3, 
                                                             as output.
-   24 00000024 4770            BX               LR
-   25 00000026                 END                          ;
+   23 00000020 4770            BX               LR
+   24 00000022         EndLoop
+   25 00000022 4770            BX               LR
+   26 00000024         
+   27 00000024                 END                          ;
 Command Line: --debug --xref --cpu=Cortex-M4.fp --apcs=interwork --depend=.\obj
 \gcd.d -o.\obj\gcd.o -I"C:\Program Files\Keil\ARM\RV31\INC" -I"C:\Program Files
 \Keil\ARM\CMSIS\Include" -I"C:\Program Files\Keil\ARM\Inc\ST\STM32F4xx" --prede
-fine="__EVAL SETA 1" --list=.\lst\gcd.lst src\gcd.s
+fine="__EVAL SETA 1" --list=.\lst\gcd.lst src\GCD.s
 
 
 
 ARM Macro Assembler    Page 1 Alphabetic symbol ordering
 Relocatable symbols
 
-calculate_gcd 00000012
+EndLoop 00000022
+
+Symbol: EndLoop
+   Definitions
+      At line 24 in file src\GCD.s
+   Uses
+      At line 19 in file src\GCD.s
+Comment: EndLoop used once
+GCD 00000000
+
+Symbol: GCD
+   Definitions
+      At line 3 in file src\GCD.s
+   Uses
+      At line 2 in file src\GCD.s
+Comment: GCD used once
+calculate_gcd 0000000A
 
 Symbol: calculate_gcd
    Definitions
-      At line 15 in file src\gcd.s
+      At line 12 in file src\GCD.s
    Uses
-      At line 14 in file src\gcd.s
-      At line 19 in file src\gcd.s
+      At line 11 in file src\GCD.s
+      At line 17 in file src\GCD.s
 
-gcd 00000000
-
-Symbol: gcd
-   Definitions
-      At line 3 in file src\gcd.s
-   Uses
-      At line 2 in file src\gcd.s
-Comment: gcd used once
-output_zero 00000020
+output_zero 0000001C
 
 Symbol: output_zero
    Definitions
-      At line 22 in file src\gcd.s
+      At line 21 in file src\GCD.s
    Uses
-      At line 8 in file src\gcd.s
-      At line 12 in file src\gcd.s
+      At line 5 in file src\GCD.s
+      At line 9 in file src\GCD.s
 
 text 00000000
 
 Symbol: text
    Definitions
-      At line 1 in file src\gcd.s
+      At line 1 in file src\GCD.s
    Uses
       None
 Comment: text unused
-4 symbols
-336 symbols in table
+5 symbols
+337 symbols in table

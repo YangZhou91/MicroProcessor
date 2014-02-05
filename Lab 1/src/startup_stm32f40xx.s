@@ -173,28 +173,27 @@ __Vectors_Size  EQU  __Vectors_End - __Vectors
 
                 AREA    |.text|, CODE, READONLY
 
-; The following code is used to enable FPU, refered from : 4.6.6 from Generic User Guide
-; CPACR is located at address 0xE000ED88 LDR.W R0, =0xE000ED88
-; Read CPACR
-	LDR R1, [R0]
-; Set bits 20-23 to enable CP10 and CP11 coprocessors ORR R1, R1, #(0xF << 20)
-; Write back the modified value to the CPACR
-	STR R1, [R0]; wait for store to complete
-	DSB
-;reset pipeline now the FPU is enabled 
-	ISB
-
 ; Reset handler
+                    
 Reset_Handler    PROC
-                 EXPORT  Reset_Handler             [WEAK]
+				 EXPORT  Reset_Handler             [WEAK]
+				    LDR.W 	R0, =0xE000ED88
+					LDR 	R1, [R0]
+					ORR 	R1, R1 , #(0xF << 20)
+					STR		R1, [R0]
+					DSB
+					ISB
         ;IMPORT  SystemInit
         IMPORT  main
-		;IMPORT 	lcm
+		IMPORT 	fermat1
+		IMPORT  GCD	
                  ;LDR     R0, =SystemInit
                  ;BLX     R0
                  LDR     R0, =main
-				 ;LDR 	 R0, =lcm
-                 BX      R0
+				 BLX     R0
+				 MOV     R0, #5959
+				 LDR 	 R1, =fermat1
+                 BLX     R1
                  ENDP
 
 ; Dummy Exception Handlers (infinite loops which can be modified)

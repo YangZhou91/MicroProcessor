@@ -553,7 +553,7 @@ void ADC_AnalogWatchdogSingleChannelConfig(ADC_TypeDef* ADCx, uint8_t ADC_Channe
   connections between the ADC and the Temperature Sensor, the Vrefint and the
   Vbat sources.
      
-  A typical configuration to get the Temperature sensor and Vrefint channels 
+  A typical configuration to inget the Temperature sensor and Vrefint channels 
   voltages is done following these steps :
    1. Enable the internal connection of Temperature sensor and Vrefint sources 
       with the ADC channels using ADC_TempSensorVrefintCmd() function. 

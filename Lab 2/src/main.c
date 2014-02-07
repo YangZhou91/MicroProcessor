@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include "stm32f4xx.h"
 #include "stm32f4xx_conf.h"
-
+// include the ADC driver.
+#include "stm32f4xx_adc.h"
 //#include "gpio_example.h"
 
 

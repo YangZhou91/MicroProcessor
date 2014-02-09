@@ -53,6 +53,7 @@ uint16_t set_ADC_config(){
 		ADC_SoftwareStartConv(ADC1);
 		while(ADC_GetFlagStatus(ADC1, ADC_FLAG_EOC) == RESET);
 		ADC_GetConversionValue(ADC1);
+		ADC_ClearFlag(ADC1, ADC_FLAG_EOC);
 		uint16_t temperature = ADC_GetConversionValue(ADC1);
 		return temperature;
 }

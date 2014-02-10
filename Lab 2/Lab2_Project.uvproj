@@ -438,6 +438,16 @@
               <FileType>5</FileType>
               <FilePath>.\src\ADC_config.h</FilePath>
             </File>
+            <File>
+              <FileName>ADC_temp.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\ADC_temp.c</FilePath>
+            </File>
+            <File>
+              <FileName>ADC_temp.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\ADC_temp.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

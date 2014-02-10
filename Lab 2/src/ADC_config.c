@@ -1,7 +1,7 @@
 #include "ADC_config.h"
 #include "stm32f4xx_adc.h"
 #include "stm32f4xx.h"
-uint16_t set_ADC_config(){
+void set_ADC_config(){
 //	Define ADC configuration
 		ADC_InitTypeDef ADC_init_structure;
 		ADC_CommonInitTypeDef ADC_Common_init_structure;
@@ -49,11 +49,5 @@ uint16_t set_ADC_config(){
 		ADC_TempSensorVrefintCmd(ENABLE);
 		//ADC_RegularChannelConfig(ADC1, ADC_Channel_12, 1, ADC_SampleTime_480Cycles); 
 		ADC_RegularChannelConfig(ADC1, ADC_Channel_16, 1, ADC_SampleTime_144Cycles); 
-		ADC_VBATCmd(ENABLE);
-		ADC_SoftwareStartConv(ADC1);
-		while(ADC_GetFlagStatus(ADC1, ADC_FLAG_EOC) == RESET);
-		ADC_GetConversionValue(ADC1);
-		ADC_ClearFlag(ADC1, ADC_FLAG_EOC);
-		uint16_t temperature = ADC_GetConversionValue(ADC1);
-		return temperature;
+		//ADC_VBATCmd(ENABLE);
 }

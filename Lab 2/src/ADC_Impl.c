@@ -1,10 +1,15 @@
-#include "ADC_config.h"
+#include <stdint.h>
 #include "stm32f4xx_adc.h"
 #include "stm32f4xx.h"
-void set_ADC_config(){
+#include <ADC_Impl.h>
+
+
+void set_ADC_config(void){
+	
 //	Define ADC configuration
 		ADC_InitTypeDef ADC_init_structure;
 		ADC_CommonInitTypeDef ADC_Common_init_structure;
+	
 //	Define structure for the analog
 		GPIO_InitTypeDef GPIO_init_structure;
 	
@@ -25,6 +30,7 @@ void set_ADC_config(){
 	
 //	3. Enable the GPIO			
 		GPIO_Init(GPIOA, &GPIO_init_structure);
+		
 //	Sets the selected data port bits.
 		GPIO_SetBits(GPIOA, GPIO_Pin_4);
 		GPIO_ResetBits(GPIOA, GPIO_Pin_4);
@@ -47,7 +53,18 @@ void set_ADC_config(){
 		ADC_Init(ADC1, &ADC_init_structure);
 		ADC_Cmd(ADC1, ENABLE); //Enable Module
 		ADC_TempSensorVrefintCmd(ENABLE);
-		//ADC_RegularChannelConfig(ADC1, ADC_Channel_12, 1, ADC_SampleTime_480Cycles); 
+		
 		ADC_RegularChannelConfig(ADC1, ADC_Channel_16, 1, ADC_SampleTime_144Cycles); 
-		//ADC_VBATCmd(ENABLE);
+		
+		return;
+}
+
+uint16_t get_ADC_temp(void){
+		
+		ADC_SoftwareStartConv(ADC1);
+		while(ADC_GetFlagStatus(ADC1, ADC_FLAG_EOC) == RESET);
+		ADC_GetConversionValue(ADC1);
+		ADC_ClearFlag(ADC1, ADC_FLAG_EOC);
+		uint16_t temperature = ADC_GetConversionValue(ADC1);
+		return temperature;
 }

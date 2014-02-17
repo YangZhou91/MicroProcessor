@@ -429,24 +429,34 @@
               <FilePath>.\src\system_stm32f4xx.c</FilePath>
             </File>
             <File>
-              <FileName>ADC_config.c</FileName>
+              <FileName>ADC_Impl.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\src\ADC_config.c</FilePath>
+              <FilePath>.\src\ADC_Impl.c</FilePath>
             </File>
             <File>
-              <FileName>ADC_config.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\ADC_config.h</FilePath>
-            </File>
-            <File>
-              <FileName>ADC_temp.c</FileName>
+              <FileName>SevenSegLED.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\src\ADC_temp.c</FilePath>
+              <FilePath>.\src\SevenSegLED.c</FilePath>
             </File>
             <File>
-              <FileName>ADC_temp.h</FileName>
+              <FileName>SevenSegLED.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\ADC_temp.h</FilePath>
+              <FilePath>.\src\SevenSegLED.h</FilePath>
+            </File>
+            <File>
+              <FileName>MovingAverageFilter.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\MovingAverageFilter.c</FilePath>
+            </File>
+            <File>
+              <FileName>MovingAverageFilter.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\MovingAverageFilter.h</FilePath>
+            </File>
+            <File>
+              <FileName>ADC_Impl.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\ADC_Impl.h</FilePath>
             </File>
           </Files>
         </Group>

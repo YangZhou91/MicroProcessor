@@ -1,12 +1,12 @@
 .\obj\stm32f4xx_dbgmcu.o: STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dbgmcu.c
 .\obj\stm32f4xx_dbgmcu.o: .\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dbgmcu.h
 .\obj\stm32f4xx_dbgmcu.o: .\src\stm32f4xx.h
-.\obj\stm32f4xx_dbgmcu.o: C:\Program Files\Keil\ARM\CMSIS\Include\core_cm4.h
-.\obj\stm32f4xx_dbgmcu.o: C:\Program Files\Keil\ARM\ARMCC\bin\..\include\stdint.h
-.\obj\stm32f4xx_dbgmcu.o: C:\Program Files\Keil\ARM\CMSIS\Include\core_cmInstr.h
-.\obj\stm32f4xx_dbgmcu.o: C:\Program Files\Keil\ARM\CMSIS\Include\core_cmFunc.h
-.\obj\stm32f4xx_dbgmcu.o: C:\Program Files\Keil\ARM\CMSIS\Include\core_cm4_simd.h
-.\obj\stm32f4xx_dbgmcu.o: C:\Program Files\Keil\ARM\Inc\ST\STM32F4xx\system_stm32f4xx.h
+.\obj\stm32f4xx_dbgmcu.o: E:\Keil\ARM\CMSIS\Include\core_cm4.h
+.\obj\stm32f4xx_dbgmcu.o: E:\Keil\ARM\ARMCC\bin\..\include\stdint.h
+.\obj\stm32f4xx_dbgmcu.o: E:\Keil\ARM\CMSIS\Include\core_cmInstr.h
+.\obj\stm32f4xx_dbgmcu.o: E:\Keil\ARM\CMSIS\Include\core_cmFunc.h
+.\obj\stm32f4xx_dbgmcu.o: E:\Keil\ARM\CMSIS\Include\core_cm4_simd.h
+.\obj\stm32f4xx_dbgmcu.o: E:\Keil\ARM\Inc\ST\STM32F4xx\system_stm32f4xx.h
 .\obj\stm32f4xx_dbgmcu.o: .\src\stm32f4xx_conf.h
 .\obj\stm32f4xx_dbgmcu.o: .\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_adc.h
 .\obj\stm32f4xx_dbgmcu.o: .\src\stm32f4xx.h

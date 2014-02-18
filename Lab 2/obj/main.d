@@ -1,12 +1,12 @@
 .\obj\main.o: src\main.c
-.\obj\main.o: E:\Keil\ARM\ARMCC\bin\..\include\stdio.h
+.\obj\main.o: C:\Program Files\Keil\ARM\ARMCC\bin\..\include\stdio.h
 .\obj\main.o: src\stm32f4xx.h
-.\obj\main.o: E:\Keil\ARM\CMSIS\Include\core_cm4.h
-.\obj\main.o: E:\Keil\ARM\ARMCC\bin\..\include\stdint.h
-.\obj\main.o: E:\Keil\ARM\CMSIS\Include\core_cmInstr.h
-.\obj\main.o: E:\Keil\ARM\CMSIS\Include\core_cmFunc.h
-.\obj\main.o: E:\Keil\ARM\CMSIS\Include\core_cm4_simd.h
-.\obj\main.o: E:\Keil\ARM\Inc\ST\STM32F4xx\system_stm32f4xx.h
+.\obj\main.o: C:\Program Files\Keil\ARM\CMSIS\Include\core_cm4.h
+.\obj\main.o: C:\Program Files\Keil\ARM\ARMCC\bin\..\include\stdint.h
+.\obj\main.o: C:\Program Files\Keil\ARM\CMSIS\Include\core_cmInstr.h
+.\obj\main.o: C:\Program Files\Keil\ARM\CMSIS\Include\core_cmFunc.h
+.\obj\main.o: C:\Program Files\Keil\ARM\CMSIS\Include\core_cm4_simd.h
+.\obj\main.o: C:\Program Files\Keil\ARM\Inc\ST\STM32F4xx\system_stm32f4xx.h
 .\obj\main.o: src\stm32f4xx_conf.h
 .\obj\main.o: .\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_adc.h
 .\obj\main.o: .\src\stm32f4xx.h
@@ -35,7 +35,7 @@
 .\obj\main.o: .\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_usart.h
 .\obj\main.o: .\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_wwdg.h
 .\obj\main.o: .\STM32F4xx_StdPeriph_Driver\inc\misc.h
-.\obj\main.o: E:\Keil\ARM\CMSIS\Include\core_cm4.h
+.\obj\main.o: C:\Program Files\Keil\ARM\CMSIS\Include\core_cm4.h
 .\obj\main.o: .\src\SevenSegLED.h
 .\obj\main.o: .\src\MovingAverageFilter.h
 .\obj\main.o: .\src\ADC_Impl.h

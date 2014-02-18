@@ -1,12 +1,12 @@
 .\obj\adc_impl.o: src\ADC_Impl.c
-.\obj\adc_impl.o: E:\Keil\ARM\ARMCC\bin\..\include\stdint.h
+.\obj\adc_impl.o: C:\Program Files\Keil\ARM\ARMCC\bin\..\include\stdint.h
 .\obj\adc_impl.o: .\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_adc.h
 .\obj\adc_impl.o: .\src\stm32f4xx.h
-.\obj\adc_impl.o: E:\Keil\ARM\CMSIS\Include\core_cm4.h
-.\obj\adc_impl.o: E:\Keil\ARM\CMSIS\Include\core_cmInstr.h
-.\obj\adc_impl.o: E:\Keil\ARM\CMSIS\Include\core_cmFunc.h
-.\obj\adc_impl.o: E:\Keil\ARM\CMSIS\Include\core_cm4_simd.h
-.\obj\adc_impl.o: E:\Keil\ARM\Inc\ST\STM32F4xx\system_stm32f4xx.h
+.\obj\adc_impl.o: C:\Program Files\Keil\ARM\CMSIS\Include\core_cm4.h
+.\obj\adc_impl.o: C:\Program Files\Keil\ARM\CMSIS\Include\core_cmInstr.h
+.\obj\adc_impl.o: C:\Program Files\Keil\ARM\CMSIS\Include\core_cmFunc.h
+.\obj\adc_impl.o: C:\Program Files\Keil\ARM\CMSIS\Include\core_cm4_simd.h
+.\obj\adc_impl.o: C:\Program Files\Keil\ARM\Inc\ST\STM32F4xx\system_stm32f4xx.h
 .\obj\adc_impl.o: .\src\stm32f4xx_conf.h
 .\obj\adc_impl.o: .\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_adc.h
 .\obj\adc_impl.o: .\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_can.h

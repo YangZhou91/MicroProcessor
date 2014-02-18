@@ -1110,19 +1110,19 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
-       228         10          0          0          0        862   adc_impl.o
-        76          4          0          8          0     247381   fputc_debug.o
-       444         74          0          8          0     236694   main.o
-       144          4          0          0          0       1082   movingaveragefilter.o
-      1724         66          0          0          0       2921   sevensegled.o
-        64         26        392          0       1536        836   startup_stm32f40xx.o
-      1136         28          0          0          0      10558   stm32f4xx_adc.o
-       604         36          0          0          0       4129   stm32f4xx_gpio.o
-      1416         48          0         16          0      11023   stm32f4xx_rcc.o
-       524         44          0         20          0       1759   system_stm32f4xx.o
+       228         10          0          0          0        878   adc_impl.o
+        76          4          0          8          0     247617   fputc_debug.o
+       444         74          0          8          0     236926   main.o
+       144          4          0          0          0       1130   movingaveragefilter.o
+      1724         66          0          0          0       2973   sevensegled.o
+        64         26        392          0       1536        852   startup_stm32f40xx.o
+      1136         28          0          0          0      10590   stm32f4xx_adc.o
+       604         36          0          0          0       4161   stm32f4xx_gpio.o
+      1416         48          0         16          0      11071   stm32f4xx_rcc.o
+       524         44          0         20          0       1807   system_stm32f4xx.o
 
     ----------------------------------------------------------------------
-      6360        340        424         52       1536     517245   Object Totals
+      6360        340        424         52       1536     518005   Object Totals
          0          0         32          0          0          0   (incl. Generated)
          0          0          0          0          0          0   (incl. Padding)
 
@@ -1194,8 +1194,8 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-     10816        538        600         52       1636     516661   Grand Totals
-     10816        538        600         52       1636     516661   ELF Image Totals
+     10816        538        600         52       1636     517421   Grand Totals
+     10816        538        600         52       1636     517421   ELF Image Totals
      10816        538        600         52          0          0   ROM Totals
 
 ==============================================================================

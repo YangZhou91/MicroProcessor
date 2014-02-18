@@ -1,9 +1,37 @@
+  /*******************************************************************
+  * @file    SevenSegLED.h
+  * @author  Tashreef Anowar, Yang Zhou
+  * @date    17-February-2014
+  * @brief   This file provides functions to manage the following 
+  *          functionalities:
+  *           - Initialization and Configuration of LED GPIOs
+  *           - Display floating point number on 7 segment
+  *           - Display temperature
+  *           - Turn PWM LED on/off
+  *           - Trigger Alarm through PWM mechanism
+  *           - Delay countdown counter
+	********************************************************************/
+
+/* 7 Segment Select line */
 #define SEGMENT_1 3
 #define SEGMENT_2 2
 #define SEGMENT_3 1
 
 #define SEGMENT_DELAY 0x430EB    //delay between corresponding segments
-	
+
+/*
+ * struct SET_ALARM
+ * ----------------------------
+ * Alarms configuration for PWM
+ *
+ *   int Period - Period
+ *	 int DutyCycle - Duty cycle
+ *	 int dutyCycleAdjust - decrements or increments duty cycle by this value
+ *	 int incr_Flag - increment from low dutycycle to high 
+ *	 int decr_Flag - decrements from high dutycycle to low 
+ *	 int count - number of times duty clycle increases or decreases 
+ *	 int width - increase/reduce duty cycle by this value
+ */
 typedef struct SET_ALARM
 {
 	int Period;
@@ -21,165 +49,70 @@ enum {
 	 ALARM_ON
 };
 
-
+/*
+ * Function: SevenSegLED
+ * ----------------------------
+ * Displays single digit number in a segment 
+ *   Returns: void
+ *
+ *   @param: int number - Number to display (0 - 9) and 10 for Dot
+ *   @param: int position - segment (1, 2, 3) 
+ *
+ *   returns: void
+ */
 void SevenSegLED(int number,  int position);
+
+/*
+ * Function: LED_GPIO_Config
+ * ----------------------------
+ * Configures GPIO port D pins(0 - 10, 14) for 7-segment and PWM LED 
+ *   Returns: void
+ *
+ *   @param: void
+ */
 void LED_GPIO_Config(void);
+
+/*
+ * Function: Delay
+ * ----------------------------
+ * Countdown timer
+ *   Returns: void
+ *
+ *   @param: uint32_t nCount - countds down from this value
+ *   returns: void
+ */
 void Delay(uint32_t nCount);
+
+/*
+ * Function: DisplayTemperature
+ * ----------------------------
+ * Breaks the floating point temperature into four segments
+ *
+ *   @param: float temperature - temperature in float
+ *   returns: void
+ */
 void DisplayTemperature(float temperature);
-void TURN_ON_OFF_PWM_LED(int flip);
-void trigger_alarm(set_alarm_t* alarm);
 
 
 /*
+ * Function: TURN_ON_OFF_PWM_LED
+ * ----------------------------
+ * Turns LED on(1) or off(0)
+ *
+ *   @param: int flip - writesBit on pin on(1) or off(0)
+ *   returns: void
+ */
+void TURN_ON_OFF_PWM_LED(int flip);
 
-int upperlim=40000, lowerlim=24000, period, incr=0, decr=1, count, width=500;
-	period = lowerlim;
-	count = lowerlim;
+/*
+ * Function: trigger_alarm
+ * ----------------------------
+ * Displays single digit number in a segment 
+ *
+ *   @param: set_alarm_t* alarm - address of struct alarm 
+ *
+ *   returns: void
+ */
+void trigger_alarm(set_alarm_t* alarm);
 
-// LED Segments
-#define SEGMENT_1 3
-#define SEGMENT_2 2
-#define SEGMENT_3 1
 
-#define DISPLAY_0                                 \
-			GPIO_WriteBit (GPIOD, GPIO_Pin_0, Bit_SET); \
-			GPIO_WriteBit (GPIOD, GPIO_Pin_1, Bit_SET); \
-			GPIO_WriteBit (GPIOD, GPIO_Pin_2, Bit_SET); \
-		                                              \
-			GPIO_WriteBit (GPIOD, GPIO_Pin_3, Bit_RESET); \
-			GPIO_WriteBit (GPIOD, GPIO_Pin_4, Bit_SET);	  \
-		  GPIO_WriteBit (GPIOD, GPIO_Pin_5, Bit_SET);	  \
-		                                                \
-		  GPIO_WriteBit (GPIOD, GPIO_Pin_6, Bit_SET);	  \
-		  GPIO_WriteBit (GPIOD, GPIO_Pin_7, Bit_RESET); 
-		
-#define DISPLAY_1 																	\
-			GPIO_WriteBit (GPIOD, GPIO_Pin_0, Bit_RESET); \
-			GPIO_WriteBit (GPIOD, GPIO_Pin_1, Bit_RESET); \
-			GPIO_WriteBit (GPIOD, GPIO_Pin_2, Bit_SET);   \
-		                                                \
-			GPIO_WriteBit (GPIOD, GPIO_Pin_3, Bit_RESET); \
-			GPIO_WriteBit (GPIOD, GPIO_Pin_4, Bit_RESET);	\
-		  GPIO_WriteBit (GPIOD, GPIO_Pin_5, Bit_SET);   \
-		                                                \
-		  GPIO_WriteBit (GPIOD, GPIO_Pin_6, Bit_RESET);	\
-		  GPIO_WriteBit (GPIOD, GPIO_Pin_7, Bit_RESET); 
-		
-		
-#define DISPLAY_2                                   \
-			GPIO_WriteBit (GPIOD, GPIO_Pin_0, Bit_RESET); \
-			GPIO_WriteBit (GPIOD, GPIO_Pin_1, Bit_SET);   \
-			GPIO_WriteBit (GPIOD, GPIO_Pin_2, Bit_SET);   \
-		                                                \
-			GPIO_WriteBit (GPIOD, GPIO_Pin_3, Bit_SET);   \
-			GPIO_WriteBit (GPIOD, GPIO_Pin_4, Bit_SET);	  \
-		  GPIO_WriteBit (GPIOD, GPIO_Pin_5, Bit_RESET); \
-		                                                \
-		  GPIO_WriteBit (GPIOD, GPIO_Pin_6, Bit_SET);	  \
-		  GPIO_WriteBit (GPIOD, GPIO_Pin_7, Bit_RESET); 
-		
-#define DISPLAY_3                                   \
-			GPIO_WriteBit (GPIOD, GPIO_Pin_0, Bit_RESET); \
-			GPIO_WriteBit (GPIOD, GPIO_Pin_1, Bit_SET);   \
-			GPIO_WriteBit (GPIOD, GPIO_Pin_2, Bit_SET);   \
-		                                                \
-			GPIO_WriteBit (GPIOD, GPIO_Pin_3, Bit_SET);   \
-			GPIO_WriteBit (GPIOD, GPIO_Pin_4, Bit_RESET);	\
-		  GPIO_WriteBit (GPIOD, GPIO_Pin_5, Bit_SET);   \
-		                                                \
-		  GPIO_WriteBit (GPIOD, GPIO_Pin_6, Bit_SET);	  \
-		  GPIO_WriteBit (GPIOD, GPIO_Pin_7, Bit_RESET);
-
-		
-#define DISPLAY_4			                               \
-			GPIO_WriteBit (GPIOD, GPIO_Pin_0, Bit_SET);    \
-			GPIO_WriteBit (GPIOD, GPIO_Pin_1, Bit_RESET);  \
-			GPIO_WriteBit (GPIOD, GPIO_Pin_2, Bit_SET);    \
-		                                                 \
-			GPIO_WriteBit (GPIOD, GPIO_Pin_3, Bit_SET);    \
-			GPIO_WriteBit (GPIOD, GPIO_Pin_4, Bit_RESET);	 \
-		  GPIO_WriteBit (GPIOD, GPIO_Pin_5, Bit_SET);    \
-		                                                 \
-		  GPIO_WriteBit (GPIOD, GPIO_Pin_6, Bit_RESET);	 \
-		  GPIO_WriteBit (GPIOD, GPIO_Pin_7, Bit_RESET);  
-
-		
-#define DISPLAY_5                                   \
-			GPIO_WriteBit (GPIOD, GPIO_Pin_0, Bit_SET);   \
-			GPIO_WriteBit (GPIOD, GPIO_Pin_1, Bit_SET);   \
-			GPIO_WriteBit (GPIOD, GPIO_Pin_2, Bit_RESET); \
-		                                                \
-			GPIO_WriteBit (GPIOD, GPIO_Pin_3, Bit_SET);   \
-			GPIO_WriteBit (GPIOD, GPIO_Pin_4, Bit_RESET);	\
-		  GPIO_WriteBit (GPIOD, GPIO_Pin_5, Bit_SET);   \
-		                                                \
-		  GPIO_WriteBit (GPIOD, GPIO_Pin_6, Bit_SET);	  \
-		  GPIO_WriteBit (GPIOD, GPIO_Pin_7, Bit_RESET);
-		
-		
-#define DISPLAY_6                                   \
-			GPIO_WriteBit (GPIOD, GPIO_Pin_0, Bit_SET);   \
-			GPIO_WriteBit (GPIOD, GPIO_Pin_1, Bit_SET);   \
-			GPIO_WriteBit (GPIOD, GPIO_Pin_2, Bit_RESET); \
-		                                                \
-			GPIO_WriteBit (GPIOD, GPIO_Pin_3, Bit_SET);   \
-			GPIO_WriteBit (GPIOD, GPIO_Pin_4, Bit_SET);	  \
-		  GPIO_WriteBit (GPIOD, GPIO_Pin_5, Bit_SET);   \
-		                                                \
-		  GPIO_WriteBit (GPIOD, GPIO_Pin_6, Bit_SET);	  \
-		  GPIO_WriteBit (GPIOD, GPIO_Pin_7, Bit_RESET);
-		
-		
-#define DISPLAY_7                                   \
-			GPIO_WriteBit (GPIOD, GPIO_Pin_0, Bit_RESET); \
-			GPIO_WriteBit (GPIOD, GPIO_Pin_1, Bit_SET);   \
-			GPIO_WriteBit (GPIOD, GPIO_Pin_2, Bit_SET);   \
-		                                                \
-			GPIO_WriteBit (GPIOD, GPIO_Pin_3, Bit_RESET); \
-			GPIO_WriteBit (GPIOD, GPIO_Pin_4, Bit_RESET);	\
-		  GPIO_WriteBit (GPIOD, GPIO_Pin_5, Bit_SET);   \
-		                                                \
-		  GPIO_WriteBit (GPIOD, GPIO_Pin_6, Bit_RESET);	\
-		  GPIO_WriteBit (GPIOD, GPIO_Pin_7, Bit_RESET);
-		
-		
-#define DISPLAY_8                                   \
-			GPIO_WriteBit (GPIOD, GPIO_Pin_0, Bit_SET);   \
-			GPIO_WriteBit (GPIOD, GPIO_Pin_1, Bit_SET);   \
-			GPIO_WriteBit (GPIOD, GPIO_Pin_2, Bit_SET);   \
-		                                                \
-			GPIO_WriteBit (GPIOD, GPIO_Pin_3, Bit_SET);   \
-			GPIO_WriteBit (GPIOD, GPIO_Pin_4, Bit_SET);	  \
-		  GPIO_WriteBit (GPIOD, GPIO_Pin_5, Bit_SET);   \
-		                                                \
-		  GPIO_WriteBit (GPIOD, GPIO_Pin_6, Bit_SET);	  \
-		  GPIO_WriteBit (GPIOD, GPIO_Pin_7, Bit_RESET);
-
-		
-#define DISPLAY_9                                   \
-			GPIO_WriteBit (GPIOD, GPIO_Pin_0, Bit_SET);   \
-			GPIO_WriteBit (GPIOD, GPIO_Pin_1, Bit_SET);   \
-			GPIO_WriteBit (GPIOD, GPIO_Pin_2, Bit_SET);   \
-		                                                \
-			GPIO_WriteBit (GPIOD, GPIO_Pin_3, Bit_SET);   \
-			GPIO_WriteBit (GPIOD, GPIO_Pin_4, Bit_RESET);	\
-		  GPIO_WriteBit (GPIOD, GPIO_Pin_5, Bit_SET);   \
-		                                                \
-		  GPIO_WriteBit (GPIOD, GPIO_Pin_6, Bit_RESET);	\
-		  GPIO_WriteBit (GPIOD, GPIO_Pin_7, Bit_RESET);
-			
-		
-		//CASE 10 DOT
-#define DOT                                           \
-			GPIO_WriteBit (GPIOD, GPIO_Pin_0, Bit_RESET);   \
-			GPIO_WriteBit (GPIOD, GPIO_Pin_1, Bit_RESET);   \
-			GPIO_WriteBit (GPIOD, GPIO_Pin_2, Bit_RESET);   \
-		                                                  \
-			GPIO_WriteBit (GPIOD, GPIO_Pin_3, Bit_RESET);   \
-			GPIO_WriteBit (GPIOD, GPIO_Pin_4, Bit_RESET);	  \
-		  GPIO_WriteBit (GPIOD, GPIO_Pin_5, Bit_RESET);   \
-		                                                  \
-		  GPIO_WriteBit (GPIOD, GPIO_Pin_6, Bit_RESET);	  \
-		  GPIO_WriteBit (GPIOD, GPIO_Pin_7, Bit_SET);     
-
-*/

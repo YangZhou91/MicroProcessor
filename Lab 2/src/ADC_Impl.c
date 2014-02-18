@@ -1,3 +1,11 @@
+  /*******************************************************************
+  * @file    ADC_Impl.c
+  * @author  Tashreef Anowar, Yang Zhou
+  * @date    17-February-2014
+  * @brief   This file provides functions to Initialize 
+	*          the GPIO for ADC.
+	********************************************************************/
+	
 #include <stdint.h>
 #include "stm32f4xx_adc.h"
 #include "stm32f4xx.h"

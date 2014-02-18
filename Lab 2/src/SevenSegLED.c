@@ -1,23 +1,32 @@
+  /*******************************************************************
+  * @file    SevenSegLED.c
+  * @author  Tashreef Anowar, Yang Zhou
+  * @date    17-February-2014
+  * @brief   This file provides functions to manage the following 
+  *          functionalities:
+  *           - Initialization and Configuration of LED GPIOs
+  *           - Display floating point number on 7 segment
+  *           - Display temperature
+  *           - Turn PWM LED on/off
+  *           - Trigger Alarm through PWM mechanism
+  *           - Delay countdown counter
+	********************************************************************/
+
 #include <stdint.h>
 #include <stdio.h>
 #include "stm32f4xx_adc.h"
 #include "stm32f4xx.h"
 #include <SevenSegLED.h>
+
+
 /*
-#define SEGMENT_1 3
-#define SEGMENT_2 2
-#define SEGMENT_3 1
-
-#define SEGMENT_DELAY 0x430EB    //delay between corresponding segments
-			
-void SevenSegLED(int number,  int position);
-void LED_GPIO_Config(void);
-void Delay(uint32_t nCount);
-void DisplayTemperature(float temperature);
-void TURN_ON_OFF_PWM_LED(int flip);
-*/
-
-// Configure the LED port D for (Pins 0 -> 10)7-seg LEDs and alarm LED(pin 14)
+ * Function: LED_GPIO_Config
+ * ----------------------------
+ * Configures GPIO port D pins(0 - 10, 14) for 7-segment and PWM LED 
+ *   Returns: void
+ *
+ *   @param: void
+ */
 void LED_GPIO_Config(void)
 {
 	GPIO_InitTypeDef GPIO_InitStructure_D;
@@ -34,8 +43,17 @@ void LED_GPIO_Config(void)
 	GPIO_Init(GPIOD, &GPIO_InitStructure_D);
 }
 
+
 /*
- * Display number in position -> segment
+ * Function: SevenSegLED
+ * ----------------------------
+ * Displays single digit number in a segment 
+ *   Returns: void
+ *
+ *   @param: int number - Number to display (0 - 9) and 10 for Dot
+ *   @param: int position - segment (1, 2, 3) 
+ *
+ *   returns: void
  */
 void SevenSegLED(int number,  int position)
 {
@@ -227,13 +245,29 @@ void SevenSegLED(int number,  int position)
 	return;
 }
 
-// Delay which acts like sleep
+/*
+ * Function: Delay
+ * ----------------------------
+ * Countdown timer
+ *   Returns: void
+ *
+ *   @param: uint32_t nCount - countds down from this value
+ *   returns: void
+ */
 void Delay(uint32_t nCount) 
 {
   while(nCount--);
 }
 
-//Display temperature 
+
+/*
+ * Function: DisplayTemperature
+ * ----------------------------
+ * Breaks the floating point temperature into four segments
+ *
+ *   @param: float temperature - temperature in float
+ *   returns: void
+ */
 void DisplayTemperature(float temperature)
 {
 	
@@ -291,12 +325,30 @@ void DisplayTemperature(float temperature)
 	
 }
 
-// turns LED on and off
+
+/*
+ * Function: TURN_ON_OFF_PWM_LED
+ * ----------------------------
+ * Turns LED on(1) or off(0)
+ *
+ *   @param: int flip - writesBit on pin on(1) or off(0)
+ *   returns: void
+ */
 void TURN_ON_OFF_PWM_LED(int flip)
 {
 	GPIO_WriteBit(GPIOD, GPIO_Pin_14, flip);
 }
 
+
+/*
+ * Function: trigger_alarm
+ * ----------------------------
+ * Displays single digit number in a segment 
+ *
+ *   @param: set_alarm_t* alarm - address of struct alarm 
+ *
+ *   returns: void
+ */
 void trigger_alarm(set_alarm_t* alarm)
 {
 	

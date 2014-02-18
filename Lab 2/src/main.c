@@ -1,3 +1,10 @@
+  /*******************************************************************
+  * @file    main.c
+  * @author  Tashreef Anowar, Yang Zhou
+  * @date    17-February-2014
+  * @brief   This file provides the main method for Lab 2.
+	********************************************************************/
+
 #include <stdio.h>
 #include "stm32f4xx.h"
 #include "stm32f4xx_conf.h"
@@ -6,9 +13,6 @@
 #include <SevenSegLED.h>
 #include <MovingAverageFilter.h>
 #include <ADC_Impl.h>
-
-//extern void set_ADC_config(void);
-//extern uint16_t get_ADC_temp(void);
 
 static volatile uint_fast16_t ticks;
 

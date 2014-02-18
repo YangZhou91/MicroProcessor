@@ -1,13 +1,13 @@
 .\obj\sevensegled.o: src\SevenSegLED.c
-.\obj\sevensegled.o: E:\Keil\ARM\ARMCC\bin\..\include\stdint.h
-.\obj\sevensegled.o: E:\Keil\ARM\ARMCC\bin\..\include\stdio.h
+.\obj\sevensegled.o: C:\Program Files\Keil\ARM\ARMCC\bin\..\include\stdint.h
+.\obj\sevensegled.o: C:\Program Files\Keil\ARM\ARMCC\bin\..\include\stdio.h
 .\obj\sevensegled.o: .\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_adc.h
 .\obj\sevensegled.o: .\src\stm32f4xx.h
-.\obj\sevensegled.o: E:\Keil\ARM\CMSIS\Include\core_cm4.h
-.\obj\sevensegled.o: E:\Keil\ARM\CMSIS\Include\core_cmInstr.h
-.\obj\sevensegled.o: E:\Keil\ARM\CMSIS\Include\core_cmFunc.h
-.\obj\sevensegled.o: E:\Keil\ARM\CMSIS\Include\core_cm4_simd.h
-.\obj\sevensegled.o: E:\Keil\ARM\Inc\ST\STM32F4xx\system_stm32f4xx.h
+.\obj\sevensegled.o: C:\Program Files\Keil\ARM\CMSIS\Include\core_cm4.h
+.\obj\sevensegled.o: C:\Program Files\Keil\ARM\CMSIS\Include\core_cmInstr.h
+.\obj\sevensegled.o: C:\Program Files\Keil\ARM\CMSIS\Include\core_cmFunc.h
+.\obj\sevensegled.o: C:\Program Files\Keil\ARM\CMSIS\Include\core_cm4_simd.h
+.\obj\sevensegled.o: C:\Program Files\Keil\ARM\Inc\ST\STM32F4xx\system_stm32f4xx.h
 .\obj\sevensegled.o: .\src\stm32f4xx_conf.h
 .\obj\sevensegled.o: .\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_adc.h
 .\obj\sevensegled.o: .\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_can.h

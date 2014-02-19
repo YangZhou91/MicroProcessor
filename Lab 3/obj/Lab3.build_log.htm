@@ -1,0 +1,61 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Project:</h2>
+C:\Users\Gavin\Dropbox\Course Material\Winter 2014\ECSE 426\Labs\MicroProcessor\Lab 3\Lab3.uvproj
+Project File Date:  02/18/2014
+
+<h2>Output:</h2>
+Build target 'Lab3'
+compiling accelerometer_conf.c...
+src\accelerometer_conf.h(13): warning:  #1-D: last line of file ends without a newline
+  axes_data read_Accelerometer_MEM(void);
+src\accelerometer_conf.c(51): warning:  #1-D: last line of file ends without a newline
+        }
+src\accelerometer_conf.c(36): warning:  #177-D: variable "temp" was declared but never referenced
+                uint8_t temp;
+src\accelerometer_conf.c: 3 warnings, 0 errors
+linking...
+Program Size: Code=5400 RO-data=424 RW-data=60 ZI-data=1028  
+".\obj\Lab3.axf" - 0 Error(s), 3 Warning(s).
+Load "C:\\Users\\Gavin\\Dropbox\\Course Material\\Winter 2014\\ECSE 426\\Labs\\MicroProcessor\\Lab 3\\obj\\Lab3.axf" 
+Erase Done.
+Programming Done.
+Verify OK.
+</pre>
+</body>
+</html>
+: Code=5376 RO-data=424 RW-data=60 ZI-data=1028  
+".\obj\Lab3.axf" - 0 Error(s), 5 Warning(s).
+Load "C:\\Users\\Gavin\\Dropbox\\Course Material\\Winter 2014\\ECSE 426\\Labs\\MicroProcessor\\Lab 3\\obj\\Lab3.axf" 
+Erase Done.
+Programming Done.
+Verify OK.
+
+Program Size: Code=5312 RO-data=424 RW-data=52 ZI-data=1044  
+".\obj\Lab3.axf" - 0 Error(s), 7 Warning(s).
+Load "C:\\Users\\Gavin\\Dropbox\\Course Material\\Winter 2014\\ECSE 426\\Labs\\MicroProcessor\\Lab 3\\obj\\Lab3.axf" 
+Erase Done.
+Programming Done.
+Verify OK.
+..
+compiling stm32f4_discovery_lis302dl.c...
+LIS302DL\stm32f4_discovery_lis302dl.c(484): warning:  #940-D: missing return statement at end of non-void function "LIS302DL_TIMEOUT_UserCallback"
+  }
+LIS302DL\stm32f4_discovery_lis302dl.c: 1 warning, 0 errors
+compiling lis3dsh.c...
+LIS3DSH\lis3dsh.c(316): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+          *out =(float)(LIS3DSH_SENSITIVITY_2G * (float)aggregateResult);
+LIS3DSH\lis3dsh.c(326): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+          *out =(float)(LIS3DSH_SENSITIVITY_4G * (float)aggregateResult);
+LIS3DSH\lis3dsh.c(336): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+          *out =(float)(LIS3DSH_SENSITIVITY_6G * (float)aggregateResult);
+LIS3DSH\lis3dsh.c(346): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+          *out =(float)(LIS3DSH_SENSITIVITY_8G * (float)aggregateResult);
+LIS3DSH\lis3dsh.c(356): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+          *out =(float)(LIS3DSH_SENSITIVITY_16G * (float)aggregateResult);
+LIS3DSH\lis3dsh.c: 5 warnings, 0 errors
+linking...
+Program Size: Code=676 RO-data=424 RW-data=20 ZI-data=1028  
+".\obj\Lab3.axf" - 0 Error(s), 7 Warning(s).

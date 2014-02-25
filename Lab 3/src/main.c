@@ -1,34 +1,36 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "stm32f4xx.h"
 #include "stm32f4xx_conf.h"
 #include "math.h"
 #include "atan_LUT.h"
 #include "accelerometer_conf.h"
+#include "calibration.h"
 
+#define PI 3.14159265
 //NOTE TO STUDENTS: Uncomment the version of drivers related to your sensor
 //#include "lis3dsh.h"
-//#include "stm32f4_discovery_lis302dl.h"
-
-char kata2[16];
-int8_t data_x, data_y, data_z;
+#include "stm32f4_discovery_lis302dl.h"
 
 int main()
 {
-		axes_data realtime_data;
-		set_Accelerometer_MEM();
-	
-		while(1)
-		{
-				realtime_data = read_Accelerometer_MEM();
-				data_x = realtime_data.axes_x;
-				data_y = realtime_data.axes_y;
-				data_z = realtime_data.axes_z;
-				printf("x: %d \t", data_x);
-				printf("y: %d \t", data_y);
-				printf("z: %d \n", data_z);
-		}
 		
-		return 0;
+	int32_t raw_data[3];
+	float calibrated_data[3] = {0, 0, 0};
+	set_Accelerometer_MEM();
+	
+	while(1)
+	{
+
+		LIS302DL_ReadACC(raw_data);
+		get_calibration_data(raw_data, calibrated_data);
+		printf("x: %f \t",calibrated_data[0]);
+		printf("y: %f \t",calibrated_data[1]);
+		printf("z: %f \n",calibrated_data[2]);
+	
+	}
+	
+	return 0;
 }
 
 

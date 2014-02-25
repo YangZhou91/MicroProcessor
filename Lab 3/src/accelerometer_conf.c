@@ -1,8 +1,7 @@
 #include "stm32f4_discovery_lis302dl.h"
 #include "accelerometer_conf.h"
+#include <stdint.h>
 
-extern uint8_t Buffer[6];
-uint8_t Buffer[6];
 
 /**
 	* @brief Set up configuration for Accelerometer 
@@ -31,21 +30,8 @@ uint8_t Buffer[6];
 		* @brief Retrieve data from Accelerometer
 		* @param void
 		*/
-	axes_data read_Accelerometer_MEM(void)
-	{
-		uint8_t temp;
-		//uint8_t xdata, ydata = 0;
-		axes_data data;
+
+	void LIS302DL_ReadACC(int32_t *output_Accelerometer);
 		
-		LIS302DL_Read(Buffer, LIS302DL_STATUS_REG_ADDR, 1);
-		if(Buffer[3] == 0)
-		{
-				LIS302DL_Read(Buffer, LIS302DL_STATUS_REG_ADDR, 1);
-		}
-		LIS302DL_Read(Buffer, LIS302DL_STATUS_REG_ADDR, 6);
-		data.axes_x = Buffer[0];
-		data.axes_y = Buffer[2];
-		data.axes_z = Buffer[4];
-		
-		return data;
-	}
+
+	

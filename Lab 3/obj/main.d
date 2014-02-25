@@ -1,5 +1,6 @@
 .\obj\main.o: src\main.c
 .\obj\main.o: C:\Program Files\Keil\ARM\ARMCC\bin\..\include\stdio.h
+.\obj\main.o: C:\Program Files\Keil\ARM\ARMCC\bin\..\include\stdlib.h
 .\obj\main.o: src\stm32f4xx.h
 .\obj\main.o: C:\Program Files\Keil\ARM\CMSIS\Include\core_cm4.h
 .\obj\main.o: C:\Program Files\Keil\ARM\ARMCC\bin\..\include\stdint.h
@@ -38,3 +39,4 @@
 .\obj\main.o: src\atan_LUT.h
 .\obj\main.o: src\accelerometer_conf.h
 .\obj\main.o: .\LIS302DL\stm32f4_discovery_lis302dl.h
+.\obj\main.o: src\calibration.h

@@ -443,6 +443,21 @@
               <FileType>5</FileType>
               <FilePath>.\src\accelerometer_conf.h</FilePath>
             </File>
+            <File>
+              <FileName>MEM_Interrupt.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\MEM_Interrupt.c</FilePath>
+            </File>
+            <File>
+              <FileName>MEM_Interrupt.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\MEM_Interrupt.h</FilePath>
+            </File>
+            <File>
+              <FileName>calibration.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\calibration.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

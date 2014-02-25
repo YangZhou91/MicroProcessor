@@ -40,3 +40,4 @@
 .\obj\main.o: src\accelerometer_conf.h
 .\obj\main.o: .\LIS302DL\stm32f4_discovery_lis302dl.h
 .\obj\main.o: src\calibration.h
+.\obj\main.o: src\tilt_angle_calculation.h

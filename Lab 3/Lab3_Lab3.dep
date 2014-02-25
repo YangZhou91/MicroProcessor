@@ -1,6 +1,6 @@
 Dependencies for Project 'Lab3', Target 'Lab3': (DO NOT MODIFY !)
 F (.\src\startup_stm32f4xx.s)(0x5131A3F8)(--cpu Cortex-M4.fp --pd "__EVAL SETA 1" -g --apcs=interwork --pd "__MICROLIB SETA 1"-I "C:\Program Files\Keil\ARM\RV31\INC"-I "C:\Program Files\Keil\ARM\CMSIS\Include"-I "C:\Program Files\Keil\ARM\Inc\ST\STM32F4xx"--list .\lst\startup_stm32f4xx.lst --xref -o .\obj\startup_stm32f4xx.o --depend .\obj\startup_stm32f4xx.d)
-F (.\src\main.c)(0x530D0072)(-c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O0 --apcs=interwork -I.\src -I.\STM32F4xx_StdPeriph_Driver\inc -I.\LIS302DL\inc -I.\LIS302DL -I.\LIS302DL -I.\LIS3DSH --c99-I "C:\Program Files\Keil\ARM\RV31\INC"-I "C:\Program Files\Keil\ARM\CMSIS\Include"-I "C:\Program Files\Keil\ARM\Inc\ST\STM32F4xx"-o .\obj\main.o --omf_browse .\obj\main.crf --depend .\obj\main.d)
+F (.\src\main.c)(0x530D0643)(-c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O0 --apcs=interwork -I.\src -I.\STM32F4xx_StdPeriph_Driver\inc -I.\LIS302DL\inc -I.\LIS302DL -I.\LIS302DL -I.\LIS3DSH --c99-I "C:\Program Files\Keil\ARM\RV31\INC"-I "C:\Program Files\Keil\ARM\CMSIS\Include"-I "C:\Program Files\Keil\ARM\Inc\ST\STM32F4xx"-o .\obj\main.o --omf_browse .\obj\main.crf --depend .\obj\main.d)
 I (C:\Program Files\Keil\ARM\ARMCC\include\stdio.h)(0x51C86004)
 I (C:\Program Files\Keil\ARM\ARMCC\include\stdlib.h)(0x51C86004)
 I (src\stm32f4xx.h)(0x511041E4)
@@ -42,6 +42,7 @@ I (src\atan_LUT.h)(0x5132911F)
 I (src\accelerometer_conf.h)(0x530C89FF)
 I (.\LIS302DL\stm32f4_discovery_lis302dl.h)(0x51327654)
 I (src\calibration.h)(0x530D0000)
+I (src\tilt_angle_calculation.h)(0x530D0576)
 F (.\src\stm32f4xx_conf.h)(0x5113402A)()
 F (.\src\system_stm32f4xx.c)(0x5075BF22)(-c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O0 --apcs=interwork -I.\src -I.\STM32F4xx_StdPeriph_Driver\inc -I.\LIS302DL\inc -I.\LIS302DL -I.\LIS302DL -I.\LIS3DSH --c99-I "C:\Program Files\Keil\ARM\RV31\INC"-I "C:\Program Files\Keil\ARM\CMSIS\Include"-I "C:\Program Files\Keil\ARM\Inc\ST\STM32F4xx"-o .\obj\system_stm32f4xx.o --omf_browse .\obj\system_stm32f4xx.crf --depend .\obj\system_stm32f4xx.d)
 I (src\stm32f4xx.h)(0x511041E4)
@@ -120,6 +121,13 @@ I (C:\Program Files\Keil\ARM\ARMCC\include\stdio.h)(0x51C86004)
 I (C:\Program Files\Keil\ARM\ARMCC\include\stdlib.h)(0x51C86004)
 I (C:\Program Files\Keil\ARM\ARMCC\include\stdint.h)(0x51C86004)
 I (C:\Program Files\Keil\ARM\ARMCC\include\math.h)(0x51C86004)
+F (.\src\calibration.h)(0x530D0000)()
+F (.\src\tilt_angle_calculation.c)(0x530D07A6)(-c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O0 --apcs=interwork -I.\src -I.\STM32F4xx_StdPeriph_Driver\inc -I.\LIS302DL\inc -I.\LIS302DL -I.\LIS302DL -I.\LIS3DSH --c99-I "C:\Program Files\Keil\ARM\RV31\INC"-I "C:\Program Files\Keil\ARM\CMSIS\Include"-I "C:\Program Files\Keil\ARM\Inc\ST\STM32F4xx"-o .\obj\tilt_angle_calculation.o --omf_browse .\obj\tilt_angle_calculation.crf --depend .\obj\tilt_angle_calculation.d)
+I (C:\Program Files\Keil\ARM\ARMCC\include\stdio.h)(0x51C86004)
+I (C:\Program Files\Keil\ARM\ARMCC\include\stdlib.h)(0x51C86004)
+I (C:\Program Files\Keil\ARM\ARMCC\include\stdint.h)(0x51C86004)
+I (C:\Program Files\Keil\ARM\ARMCC\include\math.h)(0x51C86004)
+F (.\src\tilt_angle_calculation.h)(0x530D0576)()
 F (.\STM32F4xx_StdPeriph_Driver\src\misc.c)(0x4EAABCBA)(-c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O0 --apcs=interwork -I.\src -I.\STM32F4xx_StdPeriph_Driver\inc -I.\LIS302DL\inc -I.\LIS302DL -I.\LIS302DL -I.\LIS3DSH --c99-I "C:\Program Files\Keil\ARM\RV31\INC"-I "C:\Program Files\Keil\ARM\CMSIS\Include"-I "C:\Program Files\Keil\ARM\Inc\ST\STM32F4xx"-o .\obj\misc.o --omf_browse .\obj\misc.crf --depend .\obj\misc.d)
 I (.\STM32F4xx_StdPeriph_Driver\inc\misc.h)(0x4EAABCBA)
 I (.\src\stm32f4xx.h)(0x511041E4)

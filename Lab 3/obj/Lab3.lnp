@@ -7,6 +7,7 @@
 ".\obj\accelerometer_conf.o"
 ".\obj\mem_interrupt.o"
 ".\obj\calibration.o"
+".\obj\tilt_angle_calculation.o"
 ".\obj\misc.o"
 ".\obj\stm32f4xx_adc.o"
 ".\obj\stm32f4xx_can.o"

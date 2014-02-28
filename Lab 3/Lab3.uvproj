@@ -458,6 +458,71 @@
               <FileType>1</FileType>
               <FilePath>.\src\calibration.c</FilePath>
             </File>
+            <File>
+              <FileName>calibration.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\calibration.h</FilePath>
+            </File>
+            <File>
+              <FileName>tilt_angle_calculation.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\tilt_angle_calculation.c</FilePath>
+            </File>
+            <File>
+              <FileName>tilt_angle_calculation.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\tilt_angle_calculation.h</FilePath>
+            </File>
+            <File>
+              <FileName>MovingAverageFilter.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\MovingAverageFilter.c</FilePath>
+            </File>
+            <File>
+              <FileName>MovingAverageFilter.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\MovingAverageFilter.h</FilePath>
+            </File>
+            <File>
+              <FileName>array.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\array.h</FilePath>
+            </File>
+            <File>
+              <FileName>atan_LUT.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\atan_LUT.h</FilePath>
+            </File>
+            <File>
+              <FileName>LED_Tim_Interrupt.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\LED_Tim_Interrupt.c</FilePath>
+            </File>
+            <File>
+              <FileName>LED_Tim_Interrupt.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\LED_Tim_Interrupt.h</FilePath>
+            </File>
+            <File>
+              <FileName>PWM_Servo_Impl.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\PWM_Servo_Impl.c</FilePath>
+            </File>
+            <File>
+              <FileName>PWM_Servo_Impl.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\PWM_Servo_Impl.h</FilePath>
+            </File>
+            <File>
+              <FileName>SevenSegLED.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\SevenSegLED.c</FilePath>
+            </File>
+            <File>
+              <FileName>SevenSegLED.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\SevenSegLED.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

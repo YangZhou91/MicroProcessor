@@ -31,7 +31,7 @@
 		* @param void
 		*/
 
-	void LIS302DL_ReadACC(int32_t *output_Accelerometer);
+	//void LIS302DL_ReadACC(int32_t *output_Accelerometer);
 		
 
 	

@@ -10,7 +10,6 @@
 #include <stdint.h>
 
 #define FILTER_DEPTH 20
-
 /*
  * struct filterState - Filter structure
  * ----------------------------

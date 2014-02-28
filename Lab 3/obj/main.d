@@ -42,3 +42,7 @@
 .\obj\main.o: src\calibration.h
 .\obj\main.o: src\tilt_angle_calculation.h
 .\obj\main.o: src\MovingAverageFilter.h
+.\obj\main.o: .\src\MEM_Interrupt.h
+.\obj\main.o: src\PWM_Servo_Impl.h
+.\obj\main.o: .\src\LED_Tim_Interrupt.h
+.\obj\main.o: .\src\SevenSegLED.h

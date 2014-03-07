@@ -8,13 +8,46 @@ Project File Date:  02/27/2014
 
 <h2>Output:</h2>
 Build target 'Lab3'
+compiling main.c...
+src\main.c(152): warning:  #111-D: statement is unreachable
+        return 0;
+src\main.c(35): warning:  #177-D: variable "offset_pitch" was declared but never referenced
+        float offset_roll = 0, offset_pitch;
+src\main.c: 2 warnings, 0 errors
+compiling MovingAverageFilter.c...
+src\MovingAverageFilter.c(31): warning:  #9-D: nested comment is not allowed
+        ///*
+src\MovingAverageFilter.c(38): warning:  #9-D: nested comment is not allowed
+        //*
+src\MovingAverageFilter.c(149): warning:  #1-D: last line of file ends without a newline
+  }
+src\MovingAverageFilter.c(101): warning:  #177-D: variable "sign" was declared but never referenced
+        int32_t average = 0, sign=0;
+src\MovingAverageFilter.c: 4 warnings, 0 errors
 linking...
-Program Size: Code=21576 RO-data=720 RW-data=76 ZI-data=1028  
-".\obj\Lab3.axf" - 0 Error(s), 0 Warning(s).
+Program Size: Code=21472 RO-data=720 RW-data=76 ZI-data=1028  
+".\obj\Lab3.axf" - 0 Error(s), 6 Warning(s).
 Load "C:\\Users\\Gavin\\Dropbox\\Course Material\\Winter 2014\\ECSE 426\\Labs\\MicroProcessor\\Lab 3\\obj\\Lab3.axf" 
 Erase Done.
 Programming Done.
 Verify OK.
-</pre>
-</body>
-</html>
+g LED_Tim_Interrupt.c...
+compiling PWM_Servo_Impl.c...
+src\PWM_Servo_Impl.c(105): warning:  #1-D: last line of file ends without a newline
+  }
+src\PWM_Servo_Impl.c(78): warning:  #177-D: variable "up" was declared but never referenced
+        uint32_t up = 55;
+src\PWM_Servo_Impl.c(82): warning:  #550-D: variable "check" was set but never used
+        float sign = 0, angle_neg, angle_pos, constant = (float)2/(float)9, check;
+src\PWM_Servo_Impl.c: 3 warnings, 0 errors
+compiling SevenSegLED.c...
+src\SevenSegLED.c(366): warning:  #188-D: enumerated type mixed with another type
+        GPIO_WriteBit(GPIOD, GPIO_Pin_14, flip);
+src\SevenSegLED.c: 1 warning, 0 errors
+linking...
+Program Size: Code=21488 RO-data=720 RW-data=76 ZI-data=1028  
+".\obj\Lab3.axf" - 0 Error(s), 11 Warning(s).
+Load "C:\\Users\\Gavin\\Dropbox\\Course Material\\Winter 2014\\ECSE 426\\Labs\\MicroProcessor\\Lab 3\\obj\\Lab3.axf" 
+Erase Done.
+Programming Done.
+Verify OK.

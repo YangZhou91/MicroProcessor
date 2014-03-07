@@ -23,7 +23,7 @@ typedef struct filterState
 {
 	int newIndex;                            // index to the new position in buffer
 	int fullBuffer_flag;                     // indicates full buffer flag 
-	uint16_t filterBuffer[FILTER_DEPTH];
+	int32_t filterBuffer[FILTER_DEPTH];
 } InternalStateFilter_t;
 
 
@@ -37,5 +37,5 @@ typedef struct filterState
  *
  *   returns: float filtered value
  */
-float MovingAverageFilter(InternalStateFilter_t*, float);
+int32_t MovingAverageFilter(InternalStateFilter_t*, int32_t);
 

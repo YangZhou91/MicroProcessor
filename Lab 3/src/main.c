@@ -27,7 +27,8 @@ int main()
 
 
 {
-	int32_t raw_data[3];
+	int32_t raw_data[3] = {0, 0, 0};
+	int32_t filtered_data[3] = {0, 0, 0};
 	reset_flag=1;
 	int waitOnReset = WAIT_ON_RESET;
 	float calibrated_data[3] = {0, 0, 0};
@@ -76,12 +77,32 @@ int main()
 	 * Create new filter struct object for filtering and initialize
 	 */
 	int init_buffer = 0;               // init the buffer
-	InternalStateFilter_t newFilter;
-	newFilter.newIndex = 0;
-	newFilter.fullBuffer_flag = 0;
+	InternalStateFilter_t newFilter_x;
+	newFilter_x.newIndex = 0;
+	newFilter_x.fullBuffer_flag = 0;
 	while(init_buffer < FILTER_DEPTH)
 	{
-		newFilter.filterBuffer[init_buffer] = 0;
+		newFilter_x.filterBuffer[init_buffer] = 0;
+		init_buffer++;
+	}
+	
+	init_buffer = 0;  
+	InternalStateFilter_t newFilter_y;
+	newFilter_y.newIndex = 0;
+	newFilter_y.fullBuffer_flag = 0;
+	while(init_buffer < FILTER_DEPTH)
+	{
+		newFilter_y.filterBuffer[init_buffer] = 0;
+		init_buffer++;
+	}
+	
+	init_buffer = 0;  
+	InternalStateFilter_t newFilter_z;
+	newFilter_z.newIndex = 0;
+	newFilter_z.fullBuffer_flag = 0;
+	while(init_buffer < FILTER_DEPTH)
+	{
+		newFilter_z.filterBuffer[init_buffer] = 0;
 		init_buffer++;
 	}
 	
@@ -93,24 +114,24 @@ int main()
 				Interrupt_Flag=0;
 				LIS302DL_ReadACC(raw_data);
 				//Filter out of noise from raw data
-				MovingAverageFilter(&newFilter, raw_data[0]);
-				MovingAverageFilter(&newFilter, raw_data[1]);
-				MovingAverageFilter(&newFilter, raw_data[2]);
+				filtered_data[0] = MovingAverageFilter(&newFilter_x, raw_data[0]);
+				filtered_data[1] = MovingAverageFilter(&newFilter_y, raw_data[1]);
+				filtered_data[2] = MovingAverageFilter(&newFilter_z, raw_data[2]);
 				
-				get_calibration_data(raw_data, calibrated_data);
-				//printf("x_r: %d ", raw_data[0]);
+				get_calibration_data(filtered_data, calibrated_data);
+				printf("x_r: %d ", raw_data[0]);
 				//printf("y_r: %d ", raw_data[1]);
 				//printf("z_r: %d \n", raw_data[2]);
 				
-				//printf("x_c: %f \t", calibrated_data[0]);
-				//printf("y_c: %f \t", calibrated_data[1]);
+				printf("x_fil: %d \n", filtered_data[0]);
+				//printf("y_fil: %d \n", filtered_data[1]);
 				//printf("z_c: %f \n", calibrated_data[2]);
 				
 				roll = calculate_roll(calibrated_data) + offset_roll;
 				pitch = calculate_pitch(calibrated_data);
 				
-				printf("Pitch: %f \t", pitch);
-				printf("Roll: %f \n", roll);
+				//printf("Pitch: %f \t", pitch);
+				//printf("Roll: %f \n", roll);
 				
 				//roll=45; --> for debug
 				PWM_Test(roll);	

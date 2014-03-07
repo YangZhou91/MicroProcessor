@@ -3,9 +3,9 @@
 <title>Static Call Graph - [.\obj\Lab3.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\obj\Lab3.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5.03 [Build 76]: Last Updated: Fri Feb 28 00:51:21 2014
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5.03 [Build 76]: Last Updated: Fri Feb 28 14:16:59 2014
 <BR><P>
-<H3>Maximum Stack Usage =        464 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
+<H3>Maximum Stack Usage =        696 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
 main &rArr; calculate_roll &rArr; __hardfp_pow &rArr; __kernel_poly &rArr; __aeabi_dmul &rArr; _double_epilogue &rArr; _double_round
 <P>
@@ -459,8 +459,8 @@ Global Symbols
 <P><STRONG><a name="[b]"></a>WWDG_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_stm32f4xx.o(.text))
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f4xx.o(RESET)
 </UL>
-<P><STRONG><a name="[5d]"></a>main</STRONG> (Thumb, 472 bytes, Stack size 88 bytes, main.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 464<LI>Call Chain = main &rArr; calculate_roll &rArr; __hardfp_pow &rArr; __kernel_poly &rArr; __aeabi_dmul &rArr; _double_epilogue &rArr; _double_round
+<P><STRONG><a name="[5d]"></a>main</STRONG> (Thumb, 468 bytes, Stack size 320 bytes, main.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 696<LI>Call Chain = main &rArr; calculate_roll &rArr; __hardfp_pow &rArr; __kernel_poly &rArr; __aeabi_dmul &rArr; _double_epilogue &rArr; _double_round
 </UL>
 <BR>[Calls]<UL><LI><a href="#[64]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_Accelerometer_MEM
 <LI><a href="#[71]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_calibration_data
@@ -582,8 +582,8 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[70]"></a>MovingAverageFilter</STRONG> (Thumb, 178 bytes, Stack size 8 bytes, movingaveragefilter.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = MovingAverageFilter
+<P><STRONG><a name="[70]"></a>MovingAverageFilter</STRONG> (Thumb, 114 bytes, Stack size 20 bytes, movingaveragefilter.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = MovingAverageFilter
 </UL>
 <BR>[Called By]<UL><LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
@@ -665,8 +665,8 @@ Global Symbols
 <LI><a href="#[65]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Delay
 </UL>
 
-<P><STRONG><a name="[6e]"></a>DisplayAngle</STRONG> (Thumb, 188 bytes, Stack size 48 bytes, sevensegled.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = DisplayAngle &rArr; SevenSegLED
+<P><STRONG><a name="[6e]"></a>DisplayAngle</STRONG> (Thumb, 130 bytes, Stack size 40 bytes, sevensegled.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = DisplayAngle &rArr; SevenSegLED
 </UL>
 <BR>[Calls]<UL><LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SevenSegLED
 </UL>

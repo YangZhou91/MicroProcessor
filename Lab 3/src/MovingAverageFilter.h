@@ -9,7 +9,7 @@
 	
 #include <stdint.h>
 
-#define FILTER_DEPTH 20
+#define FILTER_DEPTH 15
 /*
  * struct filterState - Filter structure
  * ----------------------------

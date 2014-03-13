@@ -38,11 +38,13 @@ int main (void) {
 	}
 }
 
+// thread function 'thread'
 void thread (void const *argument) {
 	while(1){
 		osDelay(1000);
 		GPIOD->BSRRL = GPIO_Pin_12;
 		osDelay(1000);
 		GPIOD->BSRRH = GPIO_Pin_12;
+		printf("The thread is running.");
 	}
 }

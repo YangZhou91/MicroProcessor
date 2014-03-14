@@ -1,4 +1,6 @@
 .\obj\main.o: ../main.c
+.\obj\main.o: C:\Program Files\Keil\ARM\ARMCC\bin\..\include\stdio.h
+.\obj\main.o: C:\Program Files\Keil\ARM\ARMCC\bin\..\include\stdlib.h
 .\obj\main.o: C:\Program Files\Keil\ARM\CMSIS\Include\arm_math.h
 .\obj\main.o: C:\Program Files\Keil\ARM\CMSIS\Include\core_cm4.h
 .\obj\main.o: C:\Program Files\Keil\ARM\ARMCC\bin\..\include\stdint.h
@@ -40,3 +42,5 @@
 .\obj\main.o: ../STM32F4xx_StdPeriph_Driver/inc/misc.h
 .\obj\main.o: ../inc/cmsis_os.h
 .\obj\main.o: C:\Program Files\Keil\ARM\ARMCC\bin\..\include\stddef.h
+.\obj\main.o: ../stm32f4_discovery_lis302dl.h
+.\obj\main.o: ../temperature_thread.h

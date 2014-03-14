@@ -4,3 +4,4 @@
 .\obj\temperature_thread.o: ../inc/cmsis_os.h
 .\obj\temperature_thread.o: C:\Program Files\Keil\ARM\ARMCC\bin\..\include\stdint.h
 .\obj\temperature_thread.o: C:\Program Files\Keil\ARM\ARMCC\bin\..\include\stddef.h
+.\obj\temperature_thread.o: ../ADC_Impl.h

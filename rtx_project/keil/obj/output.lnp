@@ -8,6 +8,8 @@
 ".\obj\stm32f4_discovery_lis302dl.o"
 ".\obj\tilt_thread.o"
 ".\obj\adc_impl.o"
+".\obj\sevensegled.o"
+".\obj\accelerometer_conf.o"
 ".\obj\misc.o"
 ".\obj\stm32f4xx_adc.o"
 ".\obj\stm32f4xx_can.o"

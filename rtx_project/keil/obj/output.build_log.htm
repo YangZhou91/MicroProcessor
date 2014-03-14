@@ -4,24 +4,32 @@
 <h1>µVision Build Log</h1>
 <h2>Project:</h2>
 C:\Users\Gavin\Dropbox\Course Material\Winter 2014\ECSE 426\Labs\MicroProcessor\rtx_project\keil\rtx.uvproj
-Project File Date:  03/13/2014
+Project File Date:  03/14/2014
 
 <h2>Output:</h2>
 Build target 'Project'
 compiling main.c...
-../main.c(35): warning:  #550-D: variable "tid_thread1" was set but never used
+../temperature_thread.h(1): warning:  #1-D: last line of file ends without a newline
+  void temperature_detection_thread(void const * argument);
+../tilt_thread.h(1): warning:  #1-D: last line of file ends without a newline
+  void tilt_detection_thread(void const * argument);
+../main.c(24): warning:  #550-D: variable "tid_thread1" was set but never used
         osThreadId tid_thread1;
-../main.c(36): warning:  #550-D: variable "temperature_thread" was set but never used
+../main.c(25): warning:  #550-D: variable "temperature_thread" was set but never used
         osThreadId temperature_thread;
-../main.c(37): warning:  #177-D: variable "tilt_thread" was declared but never referenced
+../main.c(26): warning:  #177-D: variable "tilt_thread" was declared but never referenced
         osThreadId tilt_thread;
-../main.c(77): warning:  #1-D: last line of file ends without a newline
+../main.c: 5 warnings, 0 errors
+compiling temperature_thread.c...
+..\temperature_thread.c(22): warning:  #1-D: last line of file ends without a newline
   }
-../main.c: 4 warnings, 0 errors
+..\temperature_thread.c: 1 warning, 0 errors
 linking...
-Program Size: Code=7316 RO-data=576 RW-data=84 ZI-data=8116  
+.\obj\output.axf: Warning: L6304W: Duplicate input file .\obj\stm32f4_discovery_lis302dl.o ignored.
+Program Size: Code=7208 RO-data=560 RW-data=80 ZI-data=8112  
+Finished: 0 information, 1 warning and 0 error messages.
 FromELF: creating hex file...
-".\obj\output.axf" - 0 Error(s), 4 Warning(s).
+".\obj\output.axf" - 0 Error(s), 7 Warning(s).
 Load "C:\\Users\\Gavin\\Dropbox\\Course Material\\Winter 2014\\ECSE 426\\Labs\\MicroProcessor\\rtx_project\\keil\\obj\\output.axf" 
 Erase Done.
 Programming Done.

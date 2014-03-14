@@ -44,3 +44,4 @@
 .\obj\main.o: C:\Program Files\Keil\ARM\ARMCC\bin\..\include\stddef.h
 .\obj\main.o: ../stm32f4_discovery_lis302dl.h
 .\obj\main.o: ../temperature_thread.h
+.\obj\main.o: ../tilt_thread.h

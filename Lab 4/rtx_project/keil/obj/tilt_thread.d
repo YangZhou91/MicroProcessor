@@ -47,3 +47,4 @@
 .\obj\tilt_thread.o: ../MEM_Interrupt.h
 .\obj\tilt_thread.o: ../SevenSegLED.h
 .\obj\tilt_thread.o: C:\Program Files\Keil\ARM\ARMCC\bin\..\include\math.h
+.\obj\tilt_thread.o: ..\LCD_Impl.h

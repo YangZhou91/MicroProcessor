@@ -34,7 +34,7 @@ void temperature_detection_thread (void const *argument) {
 		Vsense = Vdd * (float)Vadc / 4095;
 		temp = (Vsense - V25)*(float)(1000/2.5) + (float)25;
 		//DisplayTemperature(temp);
-		LCD_DisplayTemperature(temp);
+		//LCD_DisplayTemperature(temp);
 		//LCD_DisplayTiltAngle(temp, temp);
 		/*Uncomment this line will break entire project*/
 		//printf("The temperature: %f\n", temp);

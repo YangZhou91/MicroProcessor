@@ -50,7 +50,7 @@ int main (void) {
 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_12;
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;
 	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
-	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;
+	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
 	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
 	GPIO_Init(GPIOD, &GPIO_InitStructure);
 	
@@ -100,7 +100,7 @@ int main (void) {
 	temperature_thread = osThreadCreate(osThread(temperature_detection_thread),NULL);	tilt_thread = osThreadCreate(osThread(tilt_detection_thread),NULL);
 	// The below doesn't really need to be in a loop
 	while(1){
-		
+		osDelay(1000);
 		//osDelay(osWaitForever);
 		/* Every GPIO port has an input and 
 		 * output data register, ODR and IDR 
